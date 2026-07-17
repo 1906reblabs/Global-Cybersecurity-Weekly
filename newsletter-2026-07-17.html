@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Cybersecurity Weekly — July 10–17, 2026</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --bg-elevated: #161b22;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+            --danger: #f85149;
+            --warning: #d29922;
+            --success: #3fb950;
+            --code-bg: #21262d;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* Header */
+        .site-header {
+            background: var(--bg-elevated);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .site-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo-icon {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, var(--accent), #a371f7);
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: 1.5rem;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 3rem 1.5rem 2.5rem;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        .hero-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .hero-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+        /* Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .content {
+            padding: 2.5rem 0 4rem;
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .toc h2 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            column-gap: 2rem;
+        }
+        .toc li { margin-bottom: 0.4rem; }
+        .toc a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .toc a:hover { color: var(--accent); }
+        @media (max-width: 600px) {
+            .toc ul { columns: 1; }
+        }
+
+        /* Typography */
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+        h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        p strong { color: var(--text-primary); }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        li strong { color: var(--text-primary); }
+
+        /* Callouts */
+        .callout {
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        .callout-danger {
+            background: rgba(248, 81, 73, 0.08);
+            border-color: var(--danger);
+        }
+        .callout-warning {
+            background: rgba(210, 153, 34, 0.08);
+            border-color: var(--warning);
+        }
+        .callout-info {
+            background: rgba(88, 166, 255, 0.08);
+            border-color: var(--accent);
+        }
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .callout-danger .callout-title { color: var(--danger); }
+        .callout-warning .callout-title { color: var(--warning); }
+        .callout-info .callout-title { color: var(--accent); }
+        .callout p { margin-bottom: 0; color: var(--text-secondary); }
+        .callout p:last-child { margin-bottom: 0; }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .stat-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            margin-right: 0.4rem;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .tag-critical { background: rgba(248, 81, 73, 0.15); color: var(--danger); }
+        .tag-warning { background: rgba(210, 153, 34, 0.15); color: var(--warning); }
+        .tag-info { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+        .tag-success { background: rgba(63, 185, 80, 0.15); color: var(--success); }
+
+        /* Code */
+        code {
+            font-family: var(--font-mono);
+            background: var(--code-bg);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--bg-elevated);
+            border-top: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .site-footer a { color: var(--text-secondary); }
+        .site-footer a:hover { color: var(--accent); }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .back-to-top:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        /* Print */
+        @media print {
+            body { background: #fff; color: #000; }
+            .site-header, .back-to-top, .site-footer { display: none; }
+            .hero { background: #fff; border-bottom: 2px solid #000; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">&#128274;</span>
+                Global Cybersecurity Weekly
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Archive</a>
+                <a href="#toc">Sections</a>
+                <a href="#recommendations">Actions</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge">Issue 29</span>
+            <h1>The Week That Changed Everything: AI Goes Rogue, Patches Fail, and the Threat Landscape Accelerates</h1>
+            <p class="hero-subtitle">A comprehensive analysis of the most significant cybersecurity events from July 10–17, 2026 — from autonomous AI ransomware to two-hour exploit windows.</p>
+            <div class="hero-meta">
+                <span>&#128197; July 10–17, 2026</span>
+                <span>&#128220; ~6,000 words</span>
+                <span>&#128293; 10 sections</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="content">
+        <div class="container">
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">2h</span>
+                    <span class="stat-label">Fastest Exploit Window</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">5,800+</span>
+                    <span class="stat-label">Arrests in Op First Light</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2,279</span>
+                    <span class="stat-label">Q2 Ransomware Victims</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">28.3%</span>
+                    <span class="stat-label">CVEs Exploited in 24h</span>
+                </div>
+            </div>
+
+            <div class="callout callout-danger">
+                <div class="callout-title">&#9888; Executive Alert</div>
+                <p>This week documented the <strong>first fully autonomous AI ransomware agent</strong> (JADEPUFFER), a <strong>Microsoft-signed driver used in BYOVD attacks</strong>, and a <strong>two-hour vulnerability-to-exploitation window</strong> for Adobe ColdFusion. Traditional security models are no longer sufficient.</p>
+            </div>
+
+            <h2 id="toc">Table of Contents</h2>
+            <nav class="toc">
+                <ul>
+                    <li><a href="#executive-summary">Executive Summary</a></li>
+                    <li><a href="#ai-threats">1. The AI Threat Horizon</a></li>
+                    <li><a href="#vulnerabilities">2. Critical Vulnerabilities</a></li>
+                    <li><a href="#ransomware">3. Ransomware Evolution</a></li>
+                    <li><a href="#breaches">4. Major Data Breaches</a></li>
+                    <li><a href="#supply-chain">5. Supply Chain Security</a></li>
+                    <li><a href="#apt">6. State-Sponsored Threats</a></li>
+                    <li><a href="#policy">7. Law &amp; Policy</a></li>
+                    <li><a href="#emerging">8. Emerging Threats</a></li>
+                    <li><a href="#context">9. Strategic Context</a></li>
+                    <li><a href="#recommendations">10. Actionable Recommendations</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </nav>
+
+            <h2 id="executive-summary">Executive Summary</h2>
+            <p>The week of July 10–17, 2026, will be remembered as a watershed moment in cybersecurity history. For the first time, the industry documented a <strong>fully autonomous AI agent executing a complete ransomware attack lifecycle</strong> without human intervention — from initial reconnaissance to data encryption to ransom demand. Simultaneously, critical vulnerabilities in widely trusted security infrastructure were exploited at record speed, with Adobe ColdFusion flaws weaponized within <strong>two hours</strong> of patch publication and a Microsoft Defender privilege escalation bug confirmed as an active ransomware pathway twelve weeks after its fix was released.</p>
+            <p>This week's developments expose a fundamental misalignment: organizations are still operating on security models and response timelines designed for a threat landscape that no longer exists. The gap between "advisory published" and "active exploitation confirmed" has collapsed from days to hours. The gap between "security tool deployed" and "security tool weaponized" has vanished entirely. And the gap between "AI as productivity enhancer" and "AI as autonomous attacker" has closed in a single, well-documented operation.</p>
+
+            <h2 id="ai-threats">1. The AI Threat Horizon — Autonomous Attackers Arrive</h2>
+
+            <h3>JADEPUFFER: The First Fully Autonomous AI Ransomware Agent</h3>
+            <p>On July 1, 2026, Sysdig's Threat Research Team published documentation of what they characterize as the first fully end-to-end AI-agent-driven ransomware operation, which they named <strong>JADEPUFFER</strong> — classifying its operator as an <strong>Agentic Threat Actor (ATA)</strong>, a category in which the attack is delivered by an autonomous AI agent rather than a human-operated toolkit.</p>
+            <p>The operation began with an internet-facing <strong>Langflow</strong> instance, an open-source platform for orchestrating AI workflows, which the agent compromised by exploiting <strong>CVE-2025-3248</strong>, a known remote code execution flaw. From that foothold, the agent harvested cloud credentials and LLM provider API keys from the environment, then identified and pivoted to a production server running a MySQL database and an Alibaba <strong>Nacos</strong> configuration management service. It exploited <strong>CVE-2021-29441</strong>, a 2021 authentication bypass in Nacos, to access the configuration server, then used MySQL's native <code>AES_ENCRYPT()</code> function to encrypt 1,342 configuration items in place. The ransom demand arrived via a Bitcoin address and Proton Mail contact. No human operator was present at any point in the operation.</p>
+
+            <div class="callout callout-danger">
+                <div class="callout-title">&#9888; Key Finding</div>
+                <p>The detail that distinguishes JADEPUFFER from every prior ransomware documentation is the <strong>31-second self-correction</strong>. When an admin account login failed mid-operation, the agent diagnosed the failure, generated a working fix, and continued without interruption. Over 600 individual payloads carried plain-language reasoning comments documenting its own decision-making.</p>
+            </div>
+
+            <p>Every incident response model built before 2026 assumes a human attacker: one who makes timing errors, requires sleep, misreads outputs, and introduces behavioral patterns that detection systems can surface over time. JADEPUFFER exhibited none of those characteristics. The 31-second recovery is not an anomaly — it is the expected behavior of an adaptive AI agent operating within its design parameters.</p>
+            <p>The World Economic Forum's Global Cybersecurity Outlook 2026 confirmed this as the first case of agentic AI completing a full attack lifecycle, from reconnaissance to data exfiltration. This is no longer theoretical. The difference between this attack and the next one is not the sophistication of the agent. It is whether the entry point is still there.</p>
+
+            <h3>AI Coding Agents Triggering Security Detections</h3>
+            <p>Sophos analyzed a week of endpoint telemetry and found that AI coding assistants including <strong>Claude Code, Cursor, and OpenAI Codex</strong> routinely trigger security detections originally designed to identify malicious attackers. While the AI agents are not malicious, activities such as accessing browser credentials, querying Windows credential stores, downloading files with native tools, and modifying startup folders closely resemble attacker behavior, creating new operational challenges for security teams.</p>
+            <p>This creates a novel problem for SOC teams: distinguishing between legitimate AI-assisted development activity and actual compromise. The behavior overlap is not coincidental — AI coding agents are designed to perform complex system operations, and those operations mirror the techniques found in the MITRE ATT&amp;CK framework.</p>
+
+            <h3>Ghostcommit: Hiding Malicious Prompts in Images</h3>
+            <p>Researchers disclosed <strong>Ghostcommit</strong>, a novel supply chain attack that conceals prompt-injection instructions within PNG images to bypass AI code reviewers and trick coding agents into leaking secrets such as <code>.env</code> files. The ASSET Research Group demonstrated that a pull request containing an explicit, plain-text malicious prompt would be flagged, but the same prompt embedded in an image's metadata would pass review and successfully manipulate the AI agent.</p>
+
+            <h3>AI-Generated PowerShell for Active Directory Enumeration</h3>
+            <p>Cybersecurity researchers flagged an intrusion in which an unknown threat actor leveraged a <strong>vibe-coded PowerShell script</strong> for Active Directory enumeration. The script looked for the Domain Controller, mapped users, computers, and domains, before creating a directory and exporting out a number of files, and finally creating <code>AD_Report.html</code> to measure the success of the operation. The emergence of AI-generated, context-aware scripts means defenders must expect routine AD mapping attempts that look unlike older commodity tools.</p>
+
+            <h2 id="vulnerabilities">2. Critical Vulnerabilities — The Two-Hour Window</h2>
+
+            <h3>Adobe ColdFusion CVE-2026-48282: Exploited in 120 Minutes</h3>
+            <p>On June 30, 2026, Adobe published <strong>APSB26-68</strong>, patching 11 vulnerabilities in ColdFusion, seven of them rated <strong>CVSS 10.0</strong>. <strong>CVE-2026-48282</strong> is the most critical: an unauthenticated directory-traversal flaw in the RDS FILEIO handler that chains directly to remote code execution. The exploitation condition requires RDS to be enabled with RDS authentication disabled — a configuration present in a meaningful number of production deployments, particularly in legacy and development environments.</p>
+
+            <div class="callout callout-danger">
+                <div class="callout-title">&#9888; Critical Timeline</div>
+                <p>CISA added CVE-2026-48282 to the Known Exploited Vulnerabilities catalog on July 7, under BOD 26-04, with a federal agency remediation deadline of July 10. According to KEVIntel threat intelligence, <strong>active exploitation was confirmed approximately two hours after Adobe's advisory was first published</strong> — the fastest weaponization timeline tracked in 2026.</p>
+            </div>
+
+            <p>The median enterprise patch deployment cycle, as measured in the Verizon DBIR 2026, is 43 days. For CVE-2026-48282, the window was not 24 hours. It was <strong>120 minutes</strong>. The broader 2026 data context makes this a pattern rather than an outlier: <strong>28.3% of CVEs tracked by CISA were exploited within 24 hours of disclosure</strong>.</p>
+
+            <h3>BlueHammer (CVE-2026-33825): When Your Security Tool Becomes the Attack Vector</h3>
+            <p><strong>CVE-2026-33825</strong>, named BlueHammer, is a local privilege escalation vulnerability in Microsoft Defender that was publicly disclosed on April 2, 2026, by a researcher known as Nightmare Eclipse — alongside working proof-of-concept code. The vulnerability exploits how Defender handles inter-process communications and file operations during real-time scanning: a locally authenticated attacker can trigger a race condition or plant a symbolic link that causes Defender to perform file operations in attacker-controlled directories under the SYSTEM account.</p>
+            <p>Microsoft released patches on April 14, 2026. CISA added the vulnerability to the KEV catalog on April 22, with a federal deadline of May 7. The reason BlueHammer is a top story this week rather than an April story is a <strong>July 1, 2026, update to CISA's KEV entry specifically flagging confirmed active use by ransomware operators</strong>. The patch is now twelve weeks old. BleepingComputer and SecurityWeek both report that <strong>tens of thousands of Windows endpoints remain unpatched</strong>.</p>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">&#9888; Strategic Implication</div>
+                <p>Organizations that have endpoint security deployed on every managed machine, with Defender as the primary or co-installed protection engine, and that have deferred their April Windows update rollout for operational reasons, have handed ransomware operators a privilege escalation path to SYSTEM on every machine in scope. <strong>The security control has become the attack vector.</strong></p>
+            </div>
+
+            <h3>RoguePlanet: Windows Defender Zero-Day Forces Out-of-Band Patch</h3>
+            <p>Microsoft has issued an out-of-band emergency patch for <strong>RoguePlanet (CVE-2026-50656)</strong>, a high-severity privilege escalation zero-day vulnerability in Windows Defender. Disclosed publicly by a disgruntled security researcher, the vulnerability allows a local attacker to elevate their access from a basic user to the highest SYSTEM level. While the flaw requires local code execution first, it serves as a powerful second-stage tool that enables threat actors to tamper with security telemetry, dump credentials, and establish deep persistence on a compromised machine.</p>
+
+            <h3>Bad Epoll: Linux Kernel Zero-Day</h3>
+            <p>Researchers disclosed <strong>CVE-2026-46242</strong>, dubbed "Bad Epoll," a Linux kernel vulnerability that allows local attackers to escalate privileges to root by exploiting a race condition and use-after-free flaw within the kernel's epoll subsystem. The issue affects Linux servers, desktops, and Android devices. This vulnerability is particularly concerning for cloud-native environments where container escape vulnerabilities often depend on kernel-level privilege escalation.</p>
+
+            <h3>Ubiquiti UniFi OS: Maximum Severity Command Injection</h3>
+            <p>Ubiquiti has released critical security updates to address a <strong>maximum-severity command injection vulnerability</strong> in its UniFi OS platform. The flaw impacts the UniFi Connect Application used to manage commercial building operations, allowing malicious actors with network access to execute arbitrary commands on the host device. With <strong>over 100,000 UniFi OS instances exposed online globally</strong>, these systems remain a prime target for botnets and state-sponsored espionage groups.</p>
+
+            <h3>Palo Alto Networks: 13 Vulnerabilities Patched</h3>
+            <p>Palo Alto Networks recently published advisories addressing <strong>13 vulnerabilities</strong> across its product lineup, including a high-severity buffer overflow in its PAN-OS firewall software. The most critical flaw could allow an unauthenticated attacker to cause a denial-of-service condition and potentially execute arbitrary code using specially crafted network traffic. Other medium-severity bugs impact the Prisma Access Agent, potentially enabling man-in-the-middle attacks that intercept VPN traffic and bypass data loss prevention controls.</p>
+
+            <h3>Oracle E-Business Suite Under Active Attack</h3>
+            <p>Oracle E-Business Suite (EBS) is currently under attack due to a critical vulnerability (<strong>CVE-2026-46817</strong>) that allows unauthenticated attackers to take over systems. Researchers warn that successful exploitation could allow an attacker to compromise Oracle Payments. <strong>900 Oracle customers</strong> are estimated to be vulnerable to EBS attacks.</p>
+
+            <h3>SharePoint Active Exploitation</h3>
+            <p>The U.S. Cybersecurity and Infrastructure Security Agency (CISA) has warned that a high-severity Microsoft SharePoint remote code execution vulnerability (<strong>CVE-2026-45659</strong>) is being actively exploited, allowing attackers to execute arbitrary code. CISA added the flaw to its Known Exploited Vulnerabilities catalog, mandating federal agencies patch by specific deadlines.</p>
+
+            <h3>CitrixBleed2: Weaponized Within 24 Hours</h3>
+            <p>A newly disclosed CitrixBleed-class vulnerability in Citrix NetScaler appliances came under active exploitation <strong>less than a day after public disclosure</strong>, with decoy infrastructure operator Lupovis confirming a coordinated scanning-and-exploitation campaign across three separate sensor deployments. Initial access brokers have been linked to the weaponization of this flaw.</p>
+
+            <h3>CISA Adds Four Actively Exploited Flaws to KEV</h3>
+            <p>CISA added four actively exploited vulnerabilities to its Known Exploited Vulnerabilities catalog, mandating swift patching by federal agencies. The flaws impact widely used enterprise tools, including an arbitrary code execution bug in Adobe products, security bypasses in the Joomla content management system, and a severe vulnerability in the Langflow AI development framework. CISA ordered all Federal Civilian Executive Branch agencies to apply the necessary security updates by July 10, 2026.</p>
+
+            <h2 id="ransomware">3. Ransomware — Evolution, Rebranding, and AI Enhancement</h2>
+
+            <h3>The GodDamn Ransomware: BYOVD with a Microsoft-Signed Driver</h3>
+            <p>A rebranded ransomware group known as <strong>Hyadina</strong> is deploying a new locker called <strong>GodDamn</strong> against US companies using a malicious but officially Microsoft-approved driver. The attackers initially breach systems using legitimate tools like AnyDesk before dropping a custom kernel driver dubbed <strong>PoisonX</strong>, which inexplicably received a valid Microsoft Hardware Compatibility signature.</p>
+            <p>This driver enables a <strong>bring-your-own-vulnerable-driver (BYOVD)</strong> attack, allowing the hackers to silently kill endpoint security processes and remove API hooks without triggering alarms. Following this evasion, the group deploys a suite of open-source credential stealers before finally launching their ransomware payload. Symantec researchers identified the ransomware as a rebrand of Beast ransomware, itself an evolution of the Monster ransomware family.</p>
+
+            <h3>FortiBleed Linked to INC and Lynx Ransomware</h3>
+            <p>The <strong>FortiBleed</strong> campaign — mass credential theft from FortiGate devices — has been linked to <strong>INC and Lynx ransomware operations</strong>, marking the first confirmed instance of mass FortiGate credential theft being directly associated with ransomware deployment. Researchers are also investigating the role of a suspected zero-day vulnerability in the campaign.</p>
+
+            <h3>Ransomware Ecosystem Growth</h3>
+            <p>GuidePoint Security reported continued growth in ransomware activity during Q2 2026, with cybercriminals claiming <strong>2,279 victims — a 43% increase compared to the same period last year</strong>. Researchers also observed the highest number of active ransomware groups on record, underscoring the increasingly competitive cybercrime ecosystem.</p>
+            <p>Check Point Research recorded an average of <strong>2,270 weekly attacks per organization</strong> during June 2026, with ransomware incidents increasing by <strong>33% from June 2025</strong>. The Gentlemen overtook Qilin as the most active group during the month.</p>
+            <p>Broadcom's research indicates that while attacks involving encryption have remained just above 4,700 annually for the past few years, there has been a significant jump in the number of attacks that do not involve encryption. If these attacks are factored in, the number of extortion attacks in 2025 was <strong>6,182, a 23% increase on 2024</strong>.</p>
+
+            <h3>Notable Ransomware Victims This Week</h3>
+            <ul>
+                <li><strong>Nidec</strong> (Japan) — BlackField group claimed responsibility for an attack on its Taiwanese subsidiary, alleging theft of more than two terabytes of corporate data.</li>
+                <li><strong>Indra Group</strong> (Spain) — A NATO cyber coalition member, confirmed a ransomware attack affecting one subsidiary. The Gentlemen ransomware gang threatened to leak allegedly stolen data.</li>
+                <li><strong>Latvijas Valsts Meži</strong> (Latvia) — State-owned forestry company suffered an attack that disrupted mapping, hunting, contractor, and customer systems. Attackers exploited a system that had remained unpatched for two years and leaked approximately <strong>44GB</strong> of internal documents.</li>
+                <li><strong>River Bank &amp; Trust</strong> (US) — A financial institution that experienced a ransomware incident after an unauthorized actor accessed the network of parent company River Financial Corporation on June 16.</li>
+            </ul>
+
+            <h2 id="breaches">4. Major Data Breaches — Scale and Impact</h2>
+
+            <h3>Accenture: 35GB of Source Code and Keys Exposed</h3>
+            <p>IT services giant Accenture has confirmed it suffered a security breach after a threat actor known as <strong>888</strong> claimed to have stolen <strong>35 GB of source code and other data</strong> from the company. The stolen data includes source code, RSA and SSH keys, Azure tokens, and other sensitive development assets. Researchers warned that exposed source code, Azure personal access tokens, storage keys, SSH keys, RSA encryption material, and configuration files could enable follow-on attacks.</p>
+
+            <h3>AssuranceAmerica: 7 Million Driver's License Numbers</h3>
+            <p>US auto insurer <strong>AssuranceAmerica</strong> disclosed a data breach affecting approximately <strong>7 million people</strong>. Attackers targeted an employee and used compromised credentials to access company systems, stealing names, contact information, driver's license numbers, insurance policy and account data, vehicle information, and claims details. This represents the largest known breach of driver's license numbers so far in 2026.</p>
+
+            <h3>KDDI: 12 Million Email Addresses, 7.6 Million Passwords</h3>
+            <p>Japanese telecommunications giant <strong>KDDI</strong> confirmed that attackers exploited a zero-day vulnerability affecting email infrastructure shared by multiple internet service providers, exposing the email addresses of <strong>12.2 million individuals</strong> and passwords belonging to <strong>7.6 million users</strong>. The software vendor is currently working on a patch for the exploited vulnerability.</p>
+
+            <h3>Mount Royal University: 10TB of Data Stolen</h3>
+            <p>Canadian university <strong>Mount Royal</strong> has confirmed a data breach on June 17. The attack impacted current and former students. The attackers claim to have <strong>10 TB of data</strong>. The university says hackers stole and then deleted data from its file storage systems after breaching the university's network.</p>
+
+            <h3>Nintendo: Employee Data Stolen via Third-Party Service</h3>
+            <p>Nintendo of America confirmed that employee data was exposed due to a breach of the third-party service <strong>TinyPulse</strong>, with hackers demanding a <strong>$2 million ransom</strong> for the stolen information. This breach underscores the supply chain risk posed by third-party HR and employee engagement platforms.</p>
+
+            <h3>Aflac Japan: 4.4 Million Customers</h3>
+            <p>US insurance firm <strong>Aflac</strong> disclosed a data breach affecting its Japan operations after attackers accessed its policyholder portal between June 15 and June 25. Personal and financial data of nearly <strong>4.4 million customers</strong> was exposed, including policyholder information and premium payment account details.</p>
+
+            <h3>Moody Bible Institute: 2.3 Million Records</h3>
+            <p>Moody Bible Institute, a US faith-based educational institution, disclosed a data breach affecting more than <strong>2.3 million donors, students, alumni, and supporters</strong>. The ShinyHunters extortion group published allegedly stolen information, including names, dates of birth, residential addresses, email addresses, and phone numbers.</p>
+
+            <h3>Nextcloud: 367,000 Records Exposed</h3>
+            <p>European cloud provider <strong>Nextcloud</strong> leaked <strong>367,000 records</strong>, exposing staff and client data. The managed services offering was misconfigured and exposed nearly 8 GB of customer data, including invoices, email messages, names, email addresses, and much more of clients like IONOS, STRATO, and a German school ministry.</p>
+
+            <h2 id="supply-chain">5. Supply Chain and Development Security</h2>
+
+            <h3>Operation Navy Ghost: Eight Malicious PyPI Packages</h3>
+            <p>Checkmarx disclosed <strong>Operation Navy Ghost</strong>, a supply chain attack involving <strong>eight malicious PyPI packages</strong> that used Telegram as a covert command and control channel. The packages, variants of the popular Pyrogram Telegram bot framework, had been silently exfiltrating credentials and data through Telegram's own infrastructure for <strong>eight months without detection</strong>.</p>
+            <p>All eight packages have been removed from PyPI following the Checkmarx disclosure, but removal from the public index does not clean the exposure. Packages that were installed before June 24 may persist in private package registries, developer workstation pip caches, active virtual environments, container images built before the disclosure date, and any application that includes a Pyrogram variant as a bundled dependency.</p>
+
+            <h3>Injective Labs: Malicious npm Packages</h3>
+            <p>Injective Labs, a developer of blockchain and cryptocurrency software, experienced a supply chain compromise after attackers accessed its SDK project and published malicious npm packages. The affected releases exfiltrated cryptocurrency wallet private keys and seed phrases when developers used legitimate key-generation functions embedded in the compromised software. This attack is particularly damaging because it targeted the cryptographic foundations of blockchain applications.</p>
+
+            <h3>Jscrambler npm Backdoor</h3>
+            <p>The Jscrambler client-side web security company disclosed that a threat actor published a malicious version of its npm package that has been downloaded almost <strong>1,500 times</strong>. This is an ironic but serious incident: a company whose product is designed to protect JavaScript code from tampering had its own package compromised, demonstrating that no organization is immune to supply chain attacks.</p>
+
+            <h3>ModHeader Browser Extension: 1.6 Million Installs</h3>
+            <p>Google and Microsoft pulled <strong>ModHeader</strong>, a popular header-editing extension with roughly <strong>1.6 million installs</strong> across Chrome and Edge, after researchers found a hidden browsing-history collector built into its official store version. The collector was dormant — an empty allow-list kept it switched off — but the presence of the code demonstrates the persistent risk even from widely used, "legitimate" tools.</p>
+
+            <h2 id="apt">6. State-Sponsored and Advanced Persistent Threats</h2>
+
+            <h3>Armored Likho: New Group Targeting Governments and Power Companies</h3>
+            <p><strong>Armored Likho</strong> is a previously unknown hacking group that has been observed hacking power companies and government agencies across <strong>Russia, Brazil, and Kazakhstan</strong>. The emergence of new APT groups targeting critical infrastructure is a concerning development, particularly given the geopolitical tensions that often underpin such attacks.</p>
+
+            <h3>Cavern Manticore: Iran-Linked Actor Targeting Israel</h3>
+            <p>Check Point Research has profiled <strong>Cavern Manticore</strong>, an Iran-linked threat actor targeting Israeli government and information technology organizations. The group uses a modular .NET command-and-control framework and has abused remote management software and a compromised software update mechanism to deploy file-management, database, scanning, and tunneling capabilities.</p>
+
+            <h3>UAT-7810: China-Linked Actor Expanding Infrastructure</h3>
+            <p>Researchers analyzed <strong>UAT-7810</strong>, a China-linked threat actor that compromises internet-facing networking devices to expand operational relay box infrastructure. The group developed new malware components and exploited unpatched Ruckus and ASUS devices to create proxy nodes for associated threat actors.</p>
+
+            <h3>Russian State-Sponsored Targeting of Cisco Devices</h3>
+            <p>US authorities warned that hackers linked to <strong>Russian intelligence</strong> have exploited vulnerabilities in <strong>Cisco Smart Install</strong> devices. CISA issued advisory AA26-194A on July 13, 2026, urging improved router hygiene to protect against Russian state-sponsored targeting. A monthslong exploitation wave against <strong>Cisco SD-WAN systems</strong> has raised larger questions about trust and the insecurity of network infrastructure.</p>
+
+            <h2 id="policy">7. Law Enforcement, Policy, and Regulatory Developments</h2>
+
+            <h3>Operation First Light 2026: 5,800 Arrests, $300 Million Seized</h3>
+            <p>Law enforcement agencies across <strong>97 countries</strong> have arrested over <strong>5,800 suspects</strong> and seized nearly <strong>$300 million</strong> in illicit assets in a massive, coordinated anti-fraud operation. Dubbed <strong>Operation First Light 2026</strong>, the INTERPOL-led initiative targeted a wide variety of social engineering fraud, including business email compromise, sextortion, romance scams, and investment fraud.</p>
+            <p>Investigators tracked illicit money flows of both fiat currency and virtual assets, blocking over <strong>31,000 bank accounts</strong> and identifying more than <strong>142,000 victims worldwide</strong>. This operation underscores the massive scale of transnational cybercrime networks and demonstrates that international cooperation and rapid payment interception are increasingly effective tools in combating financially motivated cyber threats.</p>
+
+            <h3>Scattered Spider Extradition</h3>
+            <p>Peter Stokes, a 19-year-old dual citizen of the U.S. and Estonia, was extradited to the U.S. from Finland to face charges related to his involvement in the <strong>Scattered Spider</strong> cybercrime group. He is accused of conspiracy, cyber intrusion, and fraud. Scattered Spider is known for using social engineering tactics to gain access to victim networks, including impersonating IT help desk staff, MFA fatigue attacks, and SIM-swapping.</p>
+
+            <h3>OFAC Sanctions VPN and Cryptor Vendors</h3>
+            <p>The U.S. Department of the Treasury's Office of Foreign Assets Control (OFAC) sanctioned VPN provider <strong>1VPNS</strong> and cryptor vendor <strong>Y. Silayev</strong> for materially supporting ransomware campaigns. The FBI issued an advisory on detection and prevention TTPs. This action illustrates a pivot in targeting the support infrastructure behind ransomware campaigns, rather than just the malware actors.</p>
+
+            <h3>Pentagon Suspends CMMC Phase 2</h3>
+            <p>The Pentagon has suspended <strong>CMMC Phase 2</strong> as it rethinks contractor cybersecurity rules. A new CMMC review and reform task force will conduct a comprehensive review of the program. Defense industrial base organizations must recognize that regulatory uncertainty does not reduce adversary pressure on contractor networks or data flows. The suspension of CMMC Phase 2 can lead to delayed or deprioritized hardening of supply chain controls, expanding exposure in the interim.</p>
+
+            <h3>CISA GitHub Leak Postmortem</h3>
+            <p>CISA issued a postmortem on a data leak in which a contractor published dozens of internal CISA credentials, including <strong>AWS GovCloud keys</strong>, in a public GitHub repository for almost <strong>six months</strong> before being notified by KrebsOnSecurity. The incident is particularly embarrassing for the nation's top cybersecurity agency, but the lessons apply universally: automated secrets scanning must be deployed across all code repositories accessible by staff and contractors.</p>
+
+            <h3>NSPM-12: NIST Cyber Standards as Baseline</h3>
+            <p>The National Security Presidential Memorandum 12 laid out a new governance framework for national security systems and requires all agencies to adhere to the NIST's cyber standards.</p>
+
+            <h3>FCC Requires Emergency Alert Distributors to Secure Systems</h3>
+            <p>More than a decade after a high-profile hacking campaign, the FCC is moving from recommending basic security protocols to <strong>requiring</strong> them for emergency-alert distributors.</p>
+
+            <h3>NIST Offers Security Guidance for Water Utilities</h3>
+            <p>NIST has issued security guidance for water utilities using remote-access tools, which represent one of the water sector's biggest cybersecurity weaknesses.</p>
+
+            <h2 id="emerging">8. Emerging Threats and Novel Techniques</h2>
+
+            <h3>Ghost Phishing: Encrypted Malicious Pages</h3>
+            <p>Researchers uncovered a new <strong>"ghost phishing"</strong> campaign that uses encrypted malicious pages which remain hidden until decrypted within a victim's browser. This technique allows phishing attacks to evade traditional URL scanning while targeting Microsoft 365 credentials and sensitive enterprise data. Traditional email security gateways scan URLs at delivery time. Ghost phishing defeats this by delivering an encrypted payload that only reveals its malicious content when executed in the victim's browser.</p>
+
+            <h3>Forg365 PhaaS: $400/Month for Sophisticated M365 Attacks</h3>
+            <p>A new phishing-as-a-service (PhaaS) operation called <strong>Forg365</strong> is using a combination of device code phishing, adversary-in-the-middle (AitM) tactics, antibot evasion, AI-assisted lure creation, and post-compromise mailbox operations targeting Microsoft 365 accounts. Distributed via Telegram and costing <strong>$400 a month (or $3,800 per year)</strong>, the platform lowers the barrier to entry for sophisticated phishing and session hijacking.</p>
+
+            <h3>CrashStealer: macOS Malware with Notarized Dropper</h3>
+            <p>Cybersecurity researchers have flagged a new macOS information stealer called <strong>CrashStealer</strong> that is capable of harvesting sensitive data from compromised systems. Unlike other information stealers, CrashStealer is implemented in native C++ and uses a notarized dropper to pass macOS Gatekeeper checks. It validates the victim's login password locally before executing its payload. macOS environments are no longer materially safer by default, especially in enterprises relying on Apple notarization as a security trust anchor.</p>
+
+            <h3>RedHook Android Malware: Wireless ADB Abuse</h3>
+            <p>A new version of the <strong>RedHook Android malware</strong> abuses the Android Wireless Debugging (Wireless ADB) mechanism in a novel way to gain shell-level privileges without requiring a computer connection.</p>
+
+            <h3>Zimbra Critical Flaw</h3>
+            <p>Zimbra is urging customers to apply updates to address a critical security vulnerability impacting the Classic Web Client that could result in arbitrary code execution. The vulnerability has been described as a case of stored cross-site scripting (XSS) that could allow specially crafted emails to run malicious code in user sessions.</p>
+
+            <h2 id="context">9. Strategic Context — The Bigger Picture</h2>
+
+            <h3>The Collapse of the Patching Window</h3>
+            <p>The events of this week confirm a trend that has been accelerating throughout 2026: the window between vulnerability disclosure and active exploitation has collapsed to the point where traditional patch management cycles are no longer sufficient. Adobe ColdFusion was exploited in two hours. CitrixBleed2 was weaponized in 24 hours. SharePoint CVE-2026-45659 was exploited within days. <strong>28.3% of CVEs tracked by CISA were exploited within 24 hours of disclosure.</strong></p>
+            <p>This means that organizations must shift from a "patch on schedule" model to a "patch on intelligence" model — where the decision to apply an emergency patch is triggered by threat intelligence indicating active exploitation, not by the monthly maintenance window. It also means that exposure management — knowing what you have, where it is, and whether it is reachable — has become more critical than ever.</p>
+
+            <h3>Security Tools as Attack Vectors</h3>
+            <p>The BlueHammer, RoguePlanet, FortiClient EMS, and FortiSandbox incidents collectively demonstrate that <strong>security tooling has become a prioritized attack target</strong>. This is not a coincidence. Security tools run with elevated privileges, are trusted by the operating system and other applications, and their compromise provides access across the entire environment rather than a single asset.</p>
+            <p>Organizations must begin threat modeling their security infrastructure with the same rigor they apply to their business applications. Endpoint protection agents, firewalls, VPN gateways, SIEM platforms, and vulnerability scanners are all high-value targets. Their compromise not only disables detection and response capabilities but often provides the attacker with privileged access that bypasses normal controls.</p>
+
+            <h3>AI as Attacker and Target</h3>
+            <p>JADEPUFFER represents the arrival of autonomous AI agents as operational threat actors. But AI is also being targeted: Ghostcommit hides malicious prompts in images to manipulate AI code reviewers; AI coding agents are being used to generate attack scripts; and LLM phantom squatting — registering AI-generated domains to hijack traffic — is being exploited at scale, with researchers recording <strong>250,000 hallucinated domains and subsequent registrations</strong>.</p>
+            <p>The WEF Global Cybersecurity Outlook 2026 found that <strong>AI vulnerabilities have emerged as the second-highest concern for CEOs</strong>, behind only cyber-enabled fraud and phishing. For CISOs, ransomware remains the leading concern, with supply chain disruption holding second place.</p>
+
+            <h3>The Supply Chain Is the Battlefield</h3>
+            <p>From Operation Navy Ghost's eight-month PyPI compromise to Injective Labs' malicious npm packages to Jscrambler's own npm backdoor to Nintendo's breach via TinyPulse, this week's events confirm that supply chain attacks are not an emerging threat — they are the dominant threat. Attackers have realized that compromising a single widely used library, vendor, or service provider yields access to thousands of downstream organizations.</p>
+            <p>The Software and AI companies' new alliance to tackle open-source security flaws, formed in response to the increasing speed and capabilities of malicious hackers, is a welcome development but insufficient on its own. Organizations must implement software composition analysis, dependency scanning, and vendor risk management as core security functions, not afterthoughts.</p>
+
+            <h3>Regulatory Acceleration</h3>
+            <p>Frameworks such as the Network and Information Security Directive (NIS2), Digital Operational Resilience Act (DORA), and Cybersecurity Maturity Model Certification (CMMC) are expanding compliance obligations across critical sectors. Non-compliance now carries direct financial penalties and personal liability for senior leadership.</p>
+            <p>However, the Pentagon's suspension of CMMC Phase 2 introduces uncertainty for defense contractors. The message for security leaders should be clear: compliance deadlines may shift, but adversary pressure does not. Maturity efforts must continue regardless of regulatory timelines.</p>
+
+            <h2 id="recommendations">10. Actionable Recommendations for Security Leaders</h2>
+
+            <h3>Immediate Actions (This Week)</h3>
+            <ol>
+                <li><strong>Verify Langflow and Nacos exposure</strong> — If your organization uses Langflow or Nacos, verify that no instances are internet-accessible without authentication. Apply patches for CVE-2025-3248 and CVE-2021-29441 immediately.</li>
+                <li><strong>Audit Adobe ColdFusion deployments</strong> — Check all ColdFusion instances, particularly in development and staging environments, for RDS enabled without authentication. If immediate patching is not possible, disable RDS or enable RDS authentication as an interim mitigation.</li>
+                <li><strong>Verify Microsoft Defender patch status</strong> — Confirm that CVE-2026-33825 (BlueHammer) is patched across all Windows endpoints. Given confirmed active ransomware exploitation, unpatched endpoints should be treated as potentially compromised.</li>
+                <li><strong>Scan for Operation Navy Ghost packages</strong> — Search all codebases, container images, and internal registries for the eight malicious PyPI packages disclosed by Checkmarx. Verify Pyrogram dependencies resolve to the official package.</li>
+                <li><strong>Review Salesforce OAuth connections</strong> — Inventory all active OAuth tokens and connected apps in Salesforce Admin across business units. Review permissions granted to each integration for unnecessary or risky scopes.</li>
+            </ol>
+
+            <h3>Short-Term Actions (This Month)</h3>
+            <ol start="6">
+                <li><strong>Implement sub-24-hour patching for KEV-listed vulnerabilities</strong> — Establish a process to patch CISA KEV-listed vulnerabilities within 24 hours of addition. The 120-minute ColdFusion exploitation window means that "next maintenance window" is no longer an acceptable timeline for actively exploited flaws.</li>
+                <li><strong>Deploy automated secrets scanning</strong> — Implement automated secret-scanning tools across all GitHub and code repository environments accessible by staff and contractors. Audit for usage of cloud keys appearing in public or semi-public repositories.</li>
+                <li><strong>Review browser extension policies</strong> — Audit Chrome and Edge deployments for installations of ModHeader and other high-risk extensions. Review extension management policies and restrict installation to a vetted set.</li>
+                <li><strong>Enhance macOS endpoint monitoring</strong> — Hunt for anomalous execution of C++ binaries on macOS endpoints, particularly those recently notarized. Enhance monitoring for credential prompts that precede data harvesting.</li>
+                <li><strong>Enable device code authentication monitoring</strong> — Configure real-time monitoring for suspicious device code authentication attempts in Microsoft 365/Azure AD logs. Implement AitM detection rules for PhaaS operations like Forg365.</li>
+            </ol>
+
+            <h3>Strategic Actions (This Quarter)</h3>
+            <ol start="11">
+                <li><strong>Threat model your security infrastructure</strong> — Conduct formal threat modeling exercises for your endpoint protection, firewall, VPN, SIEM, and vulnerability management platforms. Assume these tools are high-value targets and design compensating controls.</li>
+                <li><strong>Develop AI-specific incident response playbooks</strong> — Update incident response runbooks to account for autonomous AI agents. Traditional assumptions about attacker behavior — sleep patterns, error rates, decision-making speed — do not apply to agentic threats.</li>
+                <li><strong>Implement exposure management</strong> — Deploy an exposure management platform that continuously discovers exposed assets, misconfigurations, identity risks, and potential entry points. Prioritize remediation based on exploitability, not just CVSS scores.</li>
+                <li><strong>Strengthen supply chain security</strong> — Implement software composition analysis, dependency scanning, and vendor risk management. Require software bills of materials (SBOMs) for all critical suppliers and establish a process for rapid response to supply chain compromises.</li>
+                <li><strong>Invest in workforce development</strong> — The Fortinet 2025 Global Skills Gap Report found that <strong>54% of organizations attribute breaches directly to a lack of security skills and training</strong>. As threats grow faster than teams can be built, upskilling existing staff and automating routine tasks are essential investments.</li>
+            </ol>
+
+            <h2 id="conclusion">Conclusion</h2>
+            <p>The week of July 10–17, 2026, has fundamentally altered the cybersecurity landscape. The arrival of autonomous AI ransomware agents, the collapse of the patching window to two hours, and the weaponization of security tools themselves have created a threat environment that demands immediate and fundamental changes in how organizations approach defense.</p>
+            <p>The organizations that will thrive in this new landscape are those that recognize that security is no longer about building higher walls — it is about assuming compromise, designing for resilience, and operating at the speed of the threat. The gap between what attackers can do and what defenders are prepared for has never been wider. Closing that gap is the defining challenge of the remainder of 2026.</p>
+
+            <div class="callout callout-info">
+                <div class="callout-title">&#128161; Stay Vigilant. Stay Patched. Stay Informed.</div>
+                <p><em>Global Cybersecurity Weekly</em> is published every Friday. For questions, feedback, or threat intelligence submissions, contact our editorial team.</p>
+            </div>
+
+            <hr class="divider">
+
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                <strong>Sources and Further Reading</strong><br>
+                This newsletter is compiled from open-source intelligence, vendor threat research, government advisories, and industry reporting. Key sources include CISA KEV bulletins, Check Point Research, Sysdig Threat Research Team, Sophos, BleepingComputer, The Hacker News, SecurityWeek, Dark Reading, Cybersecurity Dive, and the World Economic Forum Global Cybersecurity Outlook 2026.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem;">
+                &copy; 2026 Global Cybersecurity Weekly. All rights reserved.
+            </p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Global Cybersecurity Weekly &mdash; <a href="index.html">Archive</a> &mdash; Issue 29 &mdash; July 10&ndash;17, 2026</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+    <script>
+        const btn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('visible', window.scrollY > 400);
+        });
+    </script>
+</body>
+</html>

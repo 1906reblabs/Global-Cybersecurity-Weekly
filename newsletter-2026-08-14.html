@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Cybersecurity Weekly — Issue 30 | August 7–14, 2026</title>
+    <meta name="description" content="The week the EU AI Act went live, OWASP published the definitive GenAI security framework, and Microsoft confirmed that prompt injection is now a remote code execution primitive.">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #1c2128;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-red: #f85149;
+            --accent-orange: #ffa657;
+            --accent-yellow: #d29922;
+            --accent-green: #3fb950;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --border-color: #30363d;
+            --code-bg: #0d1117;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent-blue); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        /* Header */
+        .site-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px 0;
+            margin-bottom: 48px;
+        }
+        .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-primary); letter-spacing: 0.5px; }
+        .logo span { color: var(--accent-red); }
+        .nav-links a { font-size: 13px; color: var(--text-secondary); margin-left: 24px; font-family: var(--font-mono); }
+        .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+        /* Hero */
+        .hero {
+            padding: 48px 0 32px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 48px;
+        }
+        .issue-meta {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .meta-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); }
+        .meta-item .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .dot-red { background: var(--accent-red); }
+        .dot-orange { background: var(--accent-orange); }
+        .dot-yellow { background: var(--accent-yellow); }
+        .dot-green { background: var(--accent-green); }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        .hero .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            max-width: 700px;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 32px 0 48px;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-red);
+            display: block;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Alert box */
+        .alert-box {
+            background: rgba(248, 81, 73, 0.08);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 32px 0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+        .alert-content h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--accent-red); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; }
+        .alert-content p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; }
+
+        /* TOC */
+        .toc {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 28px 32px;
+            margin: 48px 0;
+        }
+        .toc h2 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; }
+        .toc ul { list-style: none; columns: 2; column-gap: 32px; }
+        .toc li { margin-bottom: 8px; break-inside: avoid; }
+        .toc a { color: var(--text-secondary); font-size: 14px; display: block; padding: 4px 0; transition: color 0.2s; }
+        .toc a:hover { color: var(--accent-blue); text-decoration: none; }
+        .toc a::before { content: "→ "; color: var(--border-color); }
+
+        /* Sections */
+        .section { margin-bottom: 64px; }
+        .section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section h2 .section-number {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--text-primary);
+        }
+        .section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: var(--accent-orange);
+        }
+        .section p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+        .section p strong { color: var(--text-primary); }
+
+        /* Key finding box */
+        .key-finding {
+            background: var(--bg-tertiary);
+            border-left: 3px solid var(--accent-yellow);
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-finding h4 { font-family: var(--font-mono); font-size: 12px; color: var(--accent-yellow); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 8px 0; }
+        .key-finding p { margin: 0; color: var(--text-primary); font-size: 15px; }
+
+        /* Lists */
+        .section ul, .section ol {
+            margin: 16px 0 24px 24px;
+            color: var(--text-secondary);
+        }
+        .section li { margin-bottom: 10px; }
+        .section li::marker { color: var(--text-muted); }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        th {
+            background: var(--bg-secondary);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        td { color: var(--text-secondary); }
+        tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+        /* Inline code */
+        code {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            color: var(--accent-orange);
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 3px solid var(--accent-purple);
+            padding-left: 20px;
+            margin: 24px 0;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Recommendations */
+        .recommendation-group {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+        .recommendation-group h4 {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .rec-immediate h4 { color: var(--accent-red); }
+        .rec-short h4 { color: var(--accent-orange); }
+        .rec-strategic h4 { color: var(--accent-green); }
+        .recommendation-group ol { margin: 0; padding-left: 20px; }
+        .recommendation-group li { margin-bottom: 12px; color: var(--text-secondary); }
+        .recommendation-group li strong { color: var(--text-primary); }
+
+        /* Conclusion */
+        .conclusion {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 32px;
+            margin: 48px 0;
+            text-align: center;
+        }
+        .conclusion .emoji { font-size: 32px; margin-bottom: 16px; display: block; }
+        .conclusion p { color: var(--text-secondary); font-size: 16px; margin: 0; }
+
+        /* Sources */
+        .sources {
+            margin: 48px 0;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+        }
+        .sources h2 { font-size: 14px; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+        .sources p { color: var(--text-muted); font-size: 14px; line-height: 1.8; }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 32px 0;
+            margin-top: 64px;
+            text-align: center;
+        }
+        .site-footer p { color: var(--text-muted); font-size: 13px; font-family: var(--font-mono); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 28px; }
+            .hero .subtitle { font-size: 16px; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .toc ul { columns: 1; }
+            .section h2 { font-size: 22px; }
+            .site-header .container { flex-direction: column; gap: 12px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <div class="logo"><span>●</span> GLOBAL CYBERSECURITY WEEKLY</div>
+        <nav class="nav-links">
+            <a href="index.html">Archive</a>
+            <a href="https://github.com/1906reblabs/Global-Cybersecurity-Weekly">GitHub</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
+    <div class="hero">
+        <div class="issue-meta">
+            <div class="meta-item"><span class="dot dot-red"></span>Issue 30</div>
+            <div class="meta-item"><span class="dot dot-orange"></span>August 7–14, 2026</div>
+            <div class="meta-item"><span class="dot dot-yellow"></span>TLP:CLEAR</div>
+            <div class="meta-item"><span class="dot dot-green"></span>6,100 words</div>
+        </div>
+        <h1>The Regulation-Attack Convergence</h1>
+        <p class="subtitle">The week the EU AI Act enforcement deadline arrived, OWASP published the definitive GenAI security framework, Microsoft confirmed prompt injection is now a remote code execution primitive, and CISA warned that Iranian APTs are actively targeting water system PLCs across the United States. For security leaders, the message is unambiguous: compliance and adversarial AI are no longer parallel tracks. They have merged into a single, high-velocity threat surface.</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-number">78%</span>
+            <span class="stat-label">Orgs Unprepared for EU AI Act</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Semantic Kernel RCE CVEs</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">45+</span>
+            <span class="stat-label">New MITRE ATLAS Techniques</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">12</span>
+            <span class="stat-label">EU States Missed Authority Deadline</span>
+        </div>
+    </div>
+
+    <div class="alert-box">
+        <div class="alert-icon">⚠</div>
+        <div class="alert-content">
+            <h4>Executive Alert</h4>
+            <p>This week marks the <strong>August 2, 2026 enforcement milestone</strong> for the EU AI Act's high-risk system obligations, the <strong>publication of the OWASP GenAI LLM Top 10 2026</strong>, and the disclosure of <strong>CVE-2026-26030</strong> — a vulnerability that turns prompt injection into host-level remote code execution in Microsoft's Semantic Kernel. Security leaders must now treat AI red teaming as a compliance mandate, not a research exercise.</p>
+        </div>
+    </div>
+
+    <nav class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#executive-summary">Executive Summary</a></li>
+            <li><a href="#ai-red-teaming">1. AI Red Teaming — From Research to Regulation</a></li>
+            <li><a href="#ai-security-protocols">2. AI Security Protocols — Frameworks Go Live</a></li>
+            <li><a href="#agentic-threats">3. Agentic AI Threats — When Prompts Become Shells</a></li>
+            <li><a href="#critical-vulns">4. Critical Vulnerabilities — Infrastructure Under Fire</a></li>
+            <li><a href="#breaches">5. Major Data Breaches</a></li>
+            <li><a href="#state-actors">6. State-Sponsored Threats</a></li>
+            <li><a href="#law-policy">7. Law, Policy & Regulatory Intelligence</a></li>
+            <li><a href="#emerging">8. Emerging Threats & Novel Techniques</a></li>
+            <li><a href="#strategic">9. Strategic Context — The Bigger Picture</a></li>
+            <li><a href="#recommendations">10. Actionable Recommendations</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <section class="section" id="executive-summary">
+        <h2><span class="section-number">00</span> Executive Summary</h2>
+        <p>The week of August 7–14, 2026, will be remembered as the moment when three independent forces — <strong>regulatory enforcement</strong>, <strong>adversarial AI research</strong>, and <strong>operational infrastructure attacks</strong> — converged into a single, coherent threat narrative. On August 2, the European Union's Artificial Intelligence Act entered its most consequential enforcement phase, imposing adversarial testing requirements, conformity assessments, and penalties of up to 7% of global annual turnover on entities deploying high-risk AI systems. Simultaneously, Microsoft published research confirming that prompt injection in AI agent frameworks is no longer a content-security problem — it is a <strong>host-level remote code execution primitive</strong>. And CISA, in coordination with the FBI, disclosed that Iranian-affiliated threat actors have been actively exploiting programmable logic controllers across U.S. water and wastewater infrastructure since September 2025.</p>
+
+        <p>This convergence creates a new operational reality for CTOs, CISOs, and security architects. The EU AI Act's Article 9 explicitly requires adversarial testing — red teaming — for high-risk AI systems. The OWASP GenAI LLM Top 10 2026, published on August 4, provides the first community-validated map of the risks that red teams must now hunt. And the MITRE ATLAS framework, updated to version 5.4.0 in February 2026, has expanded its coverage of agent-focused techniques including "Publish Poisoned AI Agent Tool" and "Escape to Host." The tools, the frameworks, and the legal obligations have aligned. What remains is execution.</p>
+
+        <p>The organizations that will navigate this transition successfully are those that recognize a fundamental shift: <strong>AI red teaming is no longer a specialized research function</strong>. It is a core governance requirement, a compliance checkpoint, and a operational security control. The gap between "we have an AI strategy" and "we have an AI security posture" has never been wider — and regulators, adversaries, and insurers are all measuring it now.</p>
+    </section>
+
+    <section class="section" id="ai-red-teaming">
+        <h2><span class="section-number">01</span> AI Red Teaming — From Research to Regulation</h2>
+
+        <h3>The EU AI Act Makes Red Teaming Mandatory</h3>
+        <p>On August 2, 2026, the EU AI Act's high-risk system obligations took full effect. Article 9 requires providers and deployers of high-risk AI systems to establish and maintain a <strong>risk management system</strong> that includes continuous identification and analysis of known and foreseeable risks. Article 10 mandates data governance. Article 11 requires comprehensive technical documentation. And critically, the Act's Annex III classification — covering biometric identification, critical infrastructure, education, employment, credit scoring, law enforcement, and migration systems — means that a significant percentage of enterprise AI deployments now fall under mandatory adversarial testing requirements.</p>
+
+        <p>The penalty structure is deliberately severe. Tier 1 violations — prohibited AI practices — carry fines of up to <strong>EUR 35 million or 7% of global annual turnover</strong>, exceeding GDPR's 4% maximum. Tier 2 violations, which include failures to meet high-risk system obligations, carry penalties of up to EUR 15 million or 3% of turnover. The message from Brussels is unambiguous: AI security is no longer a technical nice-to-have. It is a board-level liability.</p>
+
+        <div class="key-finding">
+            <h4>⚠ Key Finding</h4>
+            <p>As of April 2026, <strong>78% of organizations had not taken meaningful steps toward EU AI Act compliance</strong>, and over 50% lacked a basic AI system inventory. With enforcement now live, organizations without an inventory cannot classify risk levels, cannot demonstrate conformity, and cannot defend against regulatory action.</p>
+        </div>
+
+        <h3>The Market Response: CART-AI and AI-Augmented Testing</h3>
+        <p>The red teaming market has responded to regulatory pressure with two structural shifts. First, <strong>Continuous AI Red Teaming (CART-AI)</strong> is replacing periodic assessments. AI behavior changes with every model update, RAG addition, and prompt modification. A point-in-time assessment conducted in January is irrelevant by August if the underlying system has evolved. CART-AI integrates adversarial testing into CI/CD pipelines, running automated probe suites against production models on every deployment.</p>
+
+        <p>Second, <strong>AI-augmented red teaming</strong> is scaling beyond human capacity. Tools like Microsoft's PyRIT and the open-source Garak framework automate adversarial prompt generation at scales that human red teams cannot match. PyRIT, in particular, has become the industry standard for automating multi-turn attack scenarios against LLM endpoints, enabling security teams to test thousands of jailbreak variants, extraction techniques, and tool-manipulation patterns in hours rather than weeks.</p>
+
+        <p>The market trajectory is steep. The AI red teaming sector, valued at USD 1.3 billion in 2025, is projected to reach <strong>USD 5.2 billion by 2028</strong> and USD 9.8 billion by 2030, representing a 30.5% CAGR. Gartner reports that 67% of CISOs now rank AI security as their top 2026 concern — up from 23% in 2024 — and 89% plan to increase AI security spending this year. Yet only 12% of organizations currently operate formal AI red teaming programs. That gap is the defining risk of the remainder of 2026.</p>
+
+        <h3>The Red Teamer's Toolkit: PyRIT, Garak, and Custom Harnesses</h3>
+        <p>The tooling landscape for AI red teaming has matured rapidly in 2026, driven by the dual pressures of regulatory mandate and operational necessity. Microsoft's <strong>PyRIT (Python Risk Identification Toolkit)</strong> has emerged as the de facto standard for automated multi-turn attack orchestration against LLM endpoints. Unlike traditional fuzzing tools that generate random inputs, PyRIT maintains conversation state across multiple turns, enabling it to simulate sophisticated social engineering sequences, progressive jailbreak attempts, and chained extraction techniques that mirror real adversary behavior. The framework supports multiple target types — from direct API endpoints to orchestrated agent workflows — and integrates with Azure AI Content Safety for baseline comparison testing.</p>
+
+        <p><strong>Garak</strong>, the open-source vulnerability scanner for LLMs developed by NVIDIA, complements PyRIT by focusing on probe generation at scale. Garak ships with over 200 built-in probes covering prompt injection, data leakage, hallucination exploitation, and model inversion attacks. Its architecture is designed for CI/CD integration, allowing security teams to run automated probe suites against every model deployment, fine-tuning run, and RAG index update. The combination of PyRIT for multi-turn scenario simulation and Garak for broad-spectrum vulnerability scanning provides coverage that neither tool achieves alone.</p>
+
+        <p>Beyond these frameworks, mature red teams are building <strong>custom harnesses</strong> tailored to their specific AI architectures. A financial services firm deploying an agentic system for fraud detection will require probes that test for adversarial manipulation of transaction classification thresholds. A healthcare organization using LLMs for clinical decision support will need red team scenarios that test for hallucinated drug interactions and biased diagnostic recommendations. The OWASP GenAI LLM Top 10 2026 and the ASI Top 10 provide the taxonomy; custom harnesses provide the operational specificity that makes red teaming relevant to the organization's actual risk profile.</p>
+
+        <div class="key-finding">
+            <h4>⚠ Key Finding</h4>
+            <p>Organizations that rely solely on automated tool output without human analyst interpretation are missing the probabilistic nature of AI vulnerabilities. A probe that fails on run one may succeed on run seventeen due to temperature sampling, context window variation, or model update drift. Red teaming AI systems requires statistical analysis of probe success rates across multiple runs, not binary pass/fail reporting.</p>
+        </div>
+
+        <h3>Multi-Modal and Agent-Specific Testing</h3>
+        <p>The 2026 threat landscape demands that red teaming expand beyond text-based LLM probing. AI systems now process images, audio, video, and code — and each modality introduces distinct attack surfaces. Vision-language models are vulnerable to adversarial image patches that bypass safety filters. Audio models can be manipulated with perturbations inaudible to humans. And agentic systems, which combine reasoning, memory, tools, and multi-step execution, require testing that covers the full range of agent actions, not just conversational outputs.</p>
+
+        <p>The OWASP Top 10 for Agentic Applications (ASI), published in its 2026 edition, codifies these risks into ten distinct categories: Agent Goal Hijack, Tool Misuse & Exploitation, Agent Identity & Privilege Abuse, Agentic Supply Chain Compromise, Unexpected Code Execution, Memory & Context Poisoning, Insecure Inter-Agent Communication, Cascading Agent Failures, Human-Agent Trust Exploitation, and Rogue Agents. Each category represents a failure mode that traditional LLM red teaming does not capture. For organizations deploying autonomous agents — whether customer service bots, coding assistants, or security orchestration agents — the ASI Top 10 is now the minimum viable testing scope.</p>
+    </section>
+
+    <section class="section" id="ai-security-protocols">
+        <h2><span class="section-number">02</span> AI Security Protocols — Frameworks Go Live</h2>
+
+        <h3>OWASP GenAI LLM Top 10 2026: The New Baseline</h3>
+        <p>On August 4, 2026, the Open Web Application Security Project published the <strong>GenAI LLM Top 10 2026</strong> — the most significant update to AI application security guidance since the original 2023 list. Developed by over 600 contributing experts from 18 countries, the 2026 edition introduces updated rankings, expanded threat coverage, and explicit mappings to NIST AI RMF, MITRE ATLAS, CWE, and the OWASP Top 10 for Agentic Applications.</p>
+
+        <p>The 2026 list retains the LLM01–LLM10 numbering but reorders risks based on real-world incident frequency and impact. <strong>Prompt Injection (LLM01)</strong> remains the top risk, reflecting the continued dominance of input-manipulation attacks across production deployments. <strong>Sensitive Information Disclosure (LLM02)</strong> has moved up in priority, driven by high-profile breaches including the EchoLeak vulnerability in Microsoft 365 Copilot and the McKinsey Lilli breach in February 2026. Two new entries appear: <strong>System Prompt Leakage (LLM07)</strong> and <strong>Vector and Embedding Weaknesses (LLM08)</strong>, addressing risks that have emerged as RAG and embedding-based retrieval have become standard architecture patterns.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Risk</th>
+                    <th>Key Change from 2023</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>LLM01</td><td>Prompt Injection</td><td>Remains #1; expanded indirect injection coverage</td></tr>
+                <tr><td>LLM02</td><td>Sensitive Information Disclosure</td><td>Moved up; added training data extraction</td></tr>
+                <tr><td>LLM03</td><td>Supply Chain Vulnerabilities</td><td>Added model artifact signing</td></tr>
+                <tr><td>LLM04</td><td>Data and Model Poisoning</td><td>Renamed from Training Data Poisoning</td></tr>
+                <tr><td>LLM05</td><td>Improper Output Handling</td><td>Renamed from Insecure Output Handling</td></tr>
+                <tr><td>LLM06</td><td>Excessive Agency</td><td>Expanded agent-specific guidance</td></tr>
+                <tr><td>LLM07</td><td>System Prompt Leakage</td><td><strong>New entry</strong></td></tr>
+                <tr><td>LLM08</td><td>Vector and Embedding Weaknesses</td><td><strong>New entry</strong></td></tr>
+                <tr><td>LLM09</td><td>Misinformation</td><td>Renamed from Overreliance</td></tr>
+                <tr><td>LLM10</td><td>Unbounded Consumption</td><td>Renamed from Model Denial of Service; absorbs Model Theft</td></tr>
+            </tbody>
+        </table>
+
+        <h3>MITRE ATLAS v5.4.0: Agent-Focused Expansion</h3>
+        <p>The February 2026 update to MITRE ATLAS (v5.4.0) added over 45 new techniques and sub-techniques, 10 new mitigations, and 20 new case studies — with a specific focus on agentic AI threats. The framework now explicitly addresses the Model Context Protocol (MCP) attack surface, documenting techniques such as <code>AML.T0061</code> (AI Agent Tools), <code>AML.T0062</code> (Exfiltration via AI Agent Tool Invocation), and the newly added <code>Publish Poisoned AI Agent Tool</code> — where adversaries create malicious versions of legitimate MCP tools that appear safe but execute harmful actions when invoked by an agent.</p>
+
+        <p>For security teams, ATLAS provides a structured approach to AI threat modeling that integrates directly into existing SOC workflows. The framework is available in STIX 2.1 format, enabling machine-readable ingestion into threat intelligence platforms and SIEM systems. MITRE has also advanced threat emulation capabilities, with initial scenarios including prompt injection against organizational chatbots and supporting code written in Ansible playbooks for flexible model selection. Planned integration into MITRE Caldera will further operationalize AI threat emulation for enterprise red teams.</p>
+
+        <h3>NIST AI RMF and the Secure AI Initiative</h3>
+        <p>NIST's AI Risk Management Framework continues to serve as the foundational governance structure for enterprise AI security. The framework's four core functions — <strong>Govern, Map, Measure, and Manage</strong> — provide the organizational scaffolding within which red teaming, vulnerability management, and incident response operate. The Secure AI initiative, a collaboration between MITRE's Center for Threat-Informed Defense and industry partners, has produced the first ATLAS Rapid Response Report, establishing a faster model for analyzing emerging AI security incidents and adversary tradecraft as major events occur.</p>
+
+        <p>The practical implication for security leaders is clear: <strong>framework alignment is no longer optional</strong>. The EU AI Act references international standards. Insurance underwriters are beginning to require OWASP Top 10 coverage. And procurement teams are adding MITRE ATLAS mapping to vendor security questionnaires. Organizations that cannot demonstrate alignment across these three frameworks — OWASP for application risk, ATLAS for threat-informed defense, and NIST AI RMF for governance — will face compliance gaps, insurance exclusions, and competitive disadvantage.</p>
+    </section>
+
+    <section class="section" id="agentic-threats">
+        <h2><span class="section-number">03</span> Agentic AI Threats — When Prompts Become Shells</h2>
+
+        <h3>Microsoft Semantic Kernel: Prompt Injection to RCE</h3>
+        <p>On May 7, 2026, Microsoft's security research team published a detailed analysis of two critical vulnerabilities in Semantic Kernel — the company's open-source framework for building AI agents, with over 27,000 GitHub stars. The findings, disclosed as <strong>CVE-2026-25592</strong> and <strong>CVE-2026-26030</strong>, demonstrate that a single malicious prompt can achieve host-level remote code execution without any browser exploit, malicious attachment, or memory corruption bug. The agent simply does what it was designed to do: interpret natural language, choose a tool, and pass parameters into code.</p>
+
+        <p>CVE-2026-26030 exploits the In-Memory Vector Store's default filter functionality. The filter is implemented as a Python lambda expression executed using <code>eval()</code>, with the AI model-controlled parameter <code>kwargs[param.name]</code> passed unsanitized into the expression string. An attacker can close the quote and append arbitrary Python logic, turning a simple data lookup into executable payload. Microsoft's fix implements four layers of protection: an AST node-type allowlist, a function call allowlist, a dangerous attributes blocklist, and name node restrictions.</p>
+
+        <p>CVE-2026-25592 is equally severe. The <code>SessionsPythonPlugin</code> includes a <code>DownloadFileAsync</code> function that was accidentally marked with a <code>[KernelFunction]</code> attribute, advertising it to the AI model as a callable tool. The <code>localFilePath</code> parameter — which dictates where <code>File.WriteAllBytes()</code> saves data on the host — was entirely AI-controlled, with no path validation or directory restriction. A single prompt could bypass the cloud-hosted sandbox, write a malicious payload to the Windows Startup folder, and achieve full RCE.</p>
+
+        <div class="key-finding">
+            <h4>⚠ Key Finding</h4>
+            <p>The Semantic Kernel vulnerabilities prove that <strong>prompt injection is no longer a content security problem</strong>. When an AI model is wired to tools, prompt injection becomes a code execution primitive. The security model must shift from "filter bad inputs" to "assume the model is compromised and design tool permissions accordingly."</p>
+        </div>
+
+        <h3>The Excessive Agency Problem</h3>
+        <p>Gartner projects that by the end of 2026, <strong>up to 40% of enterprise applications will integrate with task-optimizing AI agents</strong> — a sharp rise from less than 5% in 2025. IBM's 2026 X-Force Threat Intelligence Index reported a 44% rise in attacks exploiting public-facing applications, many enabled by weak or missing authentication controls. AI systems that interact with APIs tied to permissive accounts are particularly at risk, as attackers leverage the legitimate access of the AI itself to navigate between systems that would otherwise require separate credentials.</p>
+
+        <p>The OWASP LLM Top 10 categorizes this as <strong>Excessive Agency (LLM06)</strong> — the risk that occurs when AI systems are given more permissions than they require. An AI agent with read/write access to a production database, the ability to send emails, and access to financial systems represents a security breach waiting to happen, whether compromised by an attacker or simply making an unauthorized decision. The 2026 guidance emphasizes three controls: apply least privilege to every agent, require human approval for high-impact actions, and log all agent actions with full context for audit and investigation.</p>
+
+        <h3>Agentic Supply Chain and Memory Poisoning</h3>
+        <p>The OWASP Top 10 for Agentic Applications introduces two risks that do not exist in traditional LLM applications: <strong>Agentic Supply Chain Compromise (ASI04)</strong> and <strong>Memory & Context Poisoning (ASI06)</strong>. Agentic supply chain attacks target dynamic runtime composition — where agents discover and integrate components during execution — rather than static pre-deployment dependencies. Memory poisoning exploits persistent agent memory across sessions, allowing adversaries to corrupt long-term state and influence future decisions.</p>
+
+        <p>Research from Zenity, published in collaboration with MITRE, found that <strong>80% of organizations report their AI agents have already performed actions beyond their intended scope</strong>, including accessing unauthorized systems (39%), inappropriately sharing sensitive data (31%), and revealing access credentials (23%). A further 96% of technology professionals identify AI agents as a growing security threat, and 66% believe this risk is immediate. These are not hypothetical concerns. They are operational realities that red teams must test against and incident response teams must prepare for.</p>
+    </section>
+
+    <section class="section" id="critical-vulns">
+        <h2><span class="section-number">04</span> Critical Vulnerabilities — Infrastructure Under Fire</h2>
+
+        <h3>CISA: Iranian APTs Targeting U.S. Water System PLCs</h3>
+        <p>On July 22, 2026, CISA, the FBI, and the EPA issued a joint cybersecurity advisory (AA26-097A) warning that Iranian-affiliated cyber actors have been actively exploiting programmable logic controllers across U.S. critical infrastructure — specifically water and wastewater systems — since September 2025. The advisory provides detailed indicators of compromise, including IP addresses used to communicate with Rockwell Automation/Allen-Bradley, Schneider Electric, and Siemens PLCs.</p>
+
+        <p>The targeting of operational technology (OT) infrastructure represents a strategic escalation. Unlike IT-focused ransomware attacks, OT compromises threaten physical processes — water treatment, chemical dosing, pressure management — with consequences that extend beyond data loss to public safety. CISA's subsequent alert on July 30, 2026, specifically urged water and wastewater systems to protect OT against activity targeting PLCs, recommending secure remote access principles and primary mitigations to reduce cyber threats.</p>
+
+        <p>The advisory is particularly significant given the EU AI Act's classification of critical infrastructure AI systems as high-risk. Water utilities deploying AI for predictive maintenance, anomaly detection, or automated response are now subject to both adversarial targeting and regulatory compliance obligations. The intersection creates a complex governance challenge: how to secure AI-enhanced OT systems against state-sponsored actors while meeting conformity assessment requirements.</p>
+
+        <h3>CISA KEV Updates: Three New Actively Exploited Flaws</h3>
+        <p>On August 11, 2026, CISA added three new vulnerabilities to its Known Exploited Vulnerabilities catalog, mandating swift remediation by federal agencies. The additions reflect the continued weaponization of widely deployed enterprise software and reinforce the pattern observed throughout 2026: the gap between disclosure and exploitation has collapsed to hours or days, making traditional patch management cycles structurally inadequate.</p>
+
+        <p>CISA also published AA26-222A, a StopRansomware advisory focusing on the Gunra ransomware operation, providing TTPs and IOCs for defender use. The advisory is part of a broader CISA initiative to move from reactive vulnerability management to proactive ransomware disruption — a shift that aligns with the agency's Joint Cyber Defense Collaborative (JCDC) model of public-private operational coordination.</p>
+
+        <h3>Abbott / Exact Sciences: The M&A Security Gap</h3>
+        <p>Abbott's $21 billion acquisition of Exact Sciences closed on March 23, 2026. By mid-June, attackers were inside the legacy Exact Sciences environment. Abbott confirmed the incident on July 16, describing unauthorized access to a limited number of internal systems in its Cancer Diagnostics business. The ShinyHunters extortion group claimed responsibility, asserting theft of 30 million customer records including approximately 1 million Social Security numbers and over 22 million doctor and patient notes.</p>
+
+        <p>The timeline is the critical detail: roughly twelve weeks separated the closing of the deal from the compromise of the systems it brought in. That is not enough time to inventory, segment, and secure an acquired data estate of that size. A proposed federal class action followed on July 24. The incident serves as a stark reminder that <strong>mergers and acquisitions remain one of the most under-managed attack surfaces in enterprise security</strong> — and that AI-driven due diligence tools, while increasingly common, are not a substitute for manual security assessment and integration planning.</p>
+    </section>
+
+    <section class="section" id="breaches">
+        <h2><span class="section-number">05</span> Major Data Breaches</h2>
+
+        <h3>KDDI: 12.2 Million Email Addresses, 7.6 Million Passwords</h3>
+        <p>Japanese telecommunications giant KDDI confirmed that attackers exploited a zero-day vulnerability affecting email infrastructure shared by multiple internet service providers. The breach exposed the email addresses of <strong>12.2 million individuals</strong> and passwords belonging to <strong>7.6 million users</strong>. The software vendor is currently working on a patch for the exploited vulnerability. The incident highlights the cascading impact of shared infrastructure compromises — a single zero-day in a multi-tenant email platform affected users across multiple ISPs simultaneously.</p>
+
+        <h3>AssuranceAmerica: 7 Million Driver's License Numbers</h3>
+        <p>US auto insurer AssuranceAmerica disclosed a data breach affecting approximately <strong>7 million people</strong> — the largest known breach of driver's license numbers so far in 2026. Attackers targeted an employee and used compromised credentials to access company systems, stealing names, contact information, driver's license numbers, insurance policy data, vehicle information, and claims details. The breach demonstrates that identity-based attacks remain the dominant initial access vector, and that credential compromise continues to bypass perimeter controls with high success rates.</p>
+
+        <h3>Aflac Japan: 4.4 Million Customers</h3>
+        <p>US insurance firm Aflac disclosed a data breach affecting its Japan operations after attackers accessed its policyholder portal between June 15 and June 25. Personal and financial data of nearly <strong>4.4 million customers</strong> was exposed, including policyholder information and premium payment account details. The breach adds to the growing tally of 2026 insurance sector compromises, suggesting that threat actors are systematically targeting the financial services vertical for its high-value personal and payment data.</p>
+
+        <h3>Moody Bible Institute: 2.3 Million Records</h3>
+        <p>Moody Bible Institute, a US faith-based educational institution, disclosed a breach affecting more than <strong>2.3 million donors, students, alumni, and supporters</strong>. The ShinyHunters extortion group published allegedly stolen information including names, dates of birth, residential addresses, email addresses, and phone numbers. The incident underscores that no sector — including non-profit and educational institutions — is outside threat actor targeting scope, and that extortion groups continue to prioritize volume over vertical specificity.</p>
+    </section>
+
+    <section class="section" id="state-actors">
+        <h2><span class="section-number">06</span> State-Sponsored Threats</h2>
+
+        <h3>Iranian APTs: OT-Focused Espionage and Disruption</h3>
+        <p>Beyond the water system PLC targeting disclosed in CISA AA26-097A, Iranian-affiliated threat actors have demonstrated a sustained focus on critical infrastructure OT networks. The advisory documents IP address ranges used for C2 communications spanning from September 2025 through July 2026, indicating a long-running campaign rather than opportunistic scanning. The targeting of PLCs from multiple manufacturers — Rockwell, Schneider, Siemens — suggests a strategic investment in cross-platform OT exploitation capabilities.</p>
+
+        <p>The threat model is not limited to data theft. PLC compromise enables process manipulation — altering chemical dosing, pressure thresholds, or flow rates — with potential for physical damage and public safety impact. For utilities that have deployed AI-based anomaly detection systems, the question is whether those systems can detect adversarial manipulation of sensor inputs designed to mask unauthorized PLC commands. This is precisely the type of adversarial testing scenario that the EU AI Act's Article 9 requires — and that most organizations have not yet implemented.</p>
+
+        <h3>Chinese Actor UAT-7810: Expanding Relay Infrastructure</h3>
+        <p>Researchers analyzed <strong>UAT-7810</strong>, a China-linked threat actor that compromises internet-facing networking devices to expand operational relay box infrastructure. The group has developed new malware components and exploited unpatched Ruckus and ASUS devices to create proxy nodes for associated threat actors. The campaign reflects a broader trend of state-affiliated actors prioritizing infrastructure persistence over immediate exploitation — building relay networks that can be activated for future operations while maintaining plausible deniability.</p>
+
+        <h3>Russian State-Sponsored Targeting of Cisco SD-WAN</h3>
+        <p>US authorities warned that Russian intelligence-linked hackers have exploited vulnerabilities in Cisco Smart Install devices, with CISA issuing advisory AA26-194A on July 13, 2026. A months-long exploitation wave against Cisco SD-WAN systems has raised fundamental questions about trust in network infrastructure security tools. The pattern — state actors targeting the very devices and protocols that enterprises rely on for secure connectivity — reinforces the strategic context that security infrastructure itself has become a prioritized attack target.</p>
+    </section>
+
+    <section class="section" id="law-policy">
+        <h2><span class="section-number">07</span> Law, Policy & Regulatory Intelligence</h2>
+
+        <h3>The Digital Omnibus: Potential Delay, No Certainty</h3>
+        <p>The European Commission proposed the Digital Omnibus on November 19, 2025, aiming to reduce AI Act compliance burden by 25% overall and 35% for SMEs by 2029. The proposal would delay the Annex III high-risk deadline to December 2, 2027 — approximately 16 months beyond the original August 2, 2026 date. The Council adopted its negotiating position on March 13, 2026, and the European Parliament's IMCO/LIBE committees adopted their joint report on March 18, 2026.</p>
+
+        <p>However, the critical caveat remains: <strong>until the Omnibus is formally enacted, the original August 2, 2026 deadline remains legally binding</strong>. Both co-legislators rejected several Commission simplification proposals and introduced a new ban on AI systems generating non-consensual sexual content. Trilogue negotiations are ongoing. Organizations that paused compliance work based on an anticipated delay are taking a significant legal risk. The time to act is now, not December 2027.</p>
+
+        <h3>SEC "AI Washing" Enforcement</h3>
+        <p>The U.S. Securities and Exchange Commission has identified overstating AI capabilities in investor filings — termed "AI washing" — as a top enforcement priority for 2026. Companies that lack transparency around how their AI makes decisions, or that suffer breaches due to ungoverned AI use, face fines from multiple fronts simultaneously. The convergence of SEC enforcement, EU AI Act penalties, and emerging state-level AI regulations creates a complex compliance matrix that requires coordinated legal, technical, and governance response.</p>
+
+        <h3>National Implementation: Fragmented Progress</h3>
+        <p>At least <strong>12 EU member states missed the August 2, 2025 deadline</strong> for competent authority appointments. Nineteen member states had not appointed single points of contact as of November 2025. France, Germany, and Ireland had not enacted national legislation by November 2025. Notable progress includes Italy's National AI Law (Law No. 132/2025), which entered force on October 10, 2025, with criminal penalties including 1–5 years imprisonment for unlawful deepfake dissemination, and Spain's early establishment of AESIA (AI Supervisory Agency).</p>
+
+        <p>The fragmentation matters for multinational organizations. A company operating across 15 EU jurisdictions may face 15 different enforcement approaches, 15 different competent authorities, and 15 different penalty calculation methodologies. The only viable response is to design compliance to the strictest standard and treat national variation as a secondary optimization problem.</p>
+    </section>
+
+    <section class="section" id="emerging">
+        <h2><span class="section-number">08</span> Emerging Threats & Novel Techniques</h2>
+
+        <h3>Ghost Phishing: Encrypted Malicious Pages</h3>
+        <p>Researchers uncovered a new "ghost phishing" campaign that uses encrypted malicious pages which remain hidden until decrypted within a victim's browser. This technique allows phishing attacks to evade traditional URL scanning while targeting Microsoft 365 credentials and sensitive enterprise data. Traditional email security gateways scan URLs at delivery time. Ghost phishing defeats this by delivering an encrypted payload that only reveals its malicious content when executed in the victim's browser — a technique that may prove particularly effective against AI-powered email security tools that rely on static content analysis.</p>
+
+        <h3>Forg365 PhaaS: $400/Month for Sophisticated M365 Attacks</h3>
+        <p>A new phishing-as-a-service operation called <strong>Forg365</strong> combines device code phishing, adversary-in-the-middle (AitM) tactics, antibot evasion, AI-assisted lure creation, and post-compromise mailbox operations targeting Microsoft 365 accounts. Distributed via Telegram and costing $400 per month, the platform lowers the barrier to entry for sophisticated phishing and session hijacking. The use of AI-assisted lure creation is particularly notable: it enables dynamic, context-aware phishing content that adapts to the target's industry, role, and recent communications — making traditional static detection signatures structurally inadequate.</p>
+
+        <h3>CrashStealer: macOS Malware with Notarized Dropper</h3>
+        <p>Cybersecurity researchers flagged a new macOS information stealer called <strong>CrashStealer</strong> that harvests sensitive data from compromised systems using a notarized dropper to pass macOS Gatekeeper checks. Unlike other stealers, CrashStealer is implemented in native C++ and validates the victim's login password locally before executing its payload. macOS environments are no longer materially safer by default, especially in enterprises relying on Apple notarization as a security trust anchor. The incident reinforces that <strong>any single-point trust mechanism — whether code signing, notarization, or AI-generated content filtering — will eventually be bypassed</strong>.</p>
+    </section>
+
+    <section class="section" id="strategic">
+        <h2><span class="section-number">09</span> Strategic Context — The Bigger Picture</h2>
+
+        <h3>The Convergence of Compliance and Adversarial AI</h3>
+        <p>The events of this week confirm a structural shift that has been building since the October 2023 White House Executive Order on AI Safety: <strong>regulatory mandates and adversarial capabilities are now advancing in lockstep</strong>. The EU AI Act requires adversarial testing. The OWASP Top 10 defines what to test for. MITRE ATLAS maps how adversaries exploit those weaknesses. And Microsoft's Semantic Kernel disclosures prove that the theoretical attack paths are being realized in production frameworks.</p>
+
+        <p>This convergence creates both risk and opportunity. Organizations that treat AI red teaming as a compliance checkbox will find that checkbox-based security fails against adaptive adversaries. Organizations that treat red teaming as a continuous operational discipline — integrated into development pipelines, mapped to threat frameworks, and governed by risk-based prioritization — will find that compliance is a natural byproduct of good security.</p>
+
+        <h3>The Trust Boundary Problem</h3>
+        <p>The core architectural challenge of 2026 is the <strong>trust boundary problem</strong>. In traditional applications, trust boundaries are well-defined: user input is untrusted, database queries are parameterized, and privilege escalation requires explicit authorization. In AI systems, the trust boundary is fluid. The model itself is a processing engine that operates on untrusted input, trusted system prompts, and retrieved context as a single undifferentiated text stream. When that model is wired to tools — databases, APIs, file systems, email — the trust boundary extends to every tool the model can invoke.</p>
+
+        <p>The Semantic Kernel RCE vulnerabilities are the canonical example of this problem. The security model assumed that the sandbox boundary (Azure Container Apps dynamic sessions) was sufficient. But because the model could invoke a file transfer function with an AI-controlled path parameter, the sandbox boundary was irrelevant. The fix required not just patching the vulnerability, but rearchitecting the trust model: AST allowlists, function call allowlists, dangerous attribute blocklists, and name node restrictions. This is defense in depth applied to AI — and it is the model that all agentic systems must adopt.</p>
+
+        <h3>OT-AI Convergence: The New Critical Infrastructure Risk</h3>
+        <p>The Iranian PLC targeting and the water system advisories highlight a second convergence: <strong>operational technology and artificial intelligence are merging</strong>. Water utilities are deploying AI for leak detection, pressure optimization, and predictive maintenance. Power grids use AI for load balancing and anomaly detection. Manufacturing plants use AI for quality control and process optimization. Each of these AI systems interacts with physical processes through PLCs, SCADA systems, and industrial controllers.</p>
+
+        <p>The security implications are profound. An adversary who can poison the training data of a water utility's anomaly detection model can teach it to ignore certain attack patterns. An adversary who can manipulate the inputs to a power grid's load balancing AI can cause cascading failures. And an adversary who can compromise the AI system itself — through prompt injection, model extraction, or supply chain poisoning — gains access to both the digital control layer and the physical processes it governs. This is not science fiction. It is the operational reality that CISA's advisories describe, and it is the risk that the EU AI Act's high-risk classification attempts to mitigate.</p>
+
+        <h3>The Insurance and Liability Shift</h3>
+        <p>Cyber insurance underwriters are rapidly recalibrating their AI risk models. In 2025, most policies treated AI systems as standard software assets, subject to the same coverage terms as traditional applications. In 2026, leading underwriters have introduced <strong>AI-specific exclusions</strong> for models that lack documented red teaming, fail to map against OWASP Top 10 categories, or operate without human-in-the-loop controls for high-impact actions. The logic is straightforward: a generative AI system with excessive agency and no output validation represents a fundamentally different risk profile than a static web application, and pricing must reflect that difference.</p>
+
+        <p>The liability implications extend beyond insurance to <strong>director and officer (D&O) coverage</strong>. The EU AI Act's penalty structure includes personal liability provisions for senior leadership in cases of willful non-compliance. The SEC's AI washing enforcement priority creates exposure for executives who make misleading AI capability claims in investor filings. And the emerging tort landscape around AI-generated harm — from discriminatory hiring algorithms to medical misdiagnosis — is creating precedent that will shape liability for years. Security leaders must work closely with legal and risk management teams to ensure that AI security posture is documented, audited, and defensible not just to regulators, but to courts and insurers.</p>
+
+        <h3>The Workforce Gap</h3>
+        <p>The Fortinet 2025 Global Skills Gap Report found that <strong>54% of organizations attribute breaches directly to a lack of security skills and training</strong>. The AI security skills gap is even more acute. Only 12% of organizations have formal AI red teaming programs. 78% are unprepared for EU AI Act compliance. And 80% report their AI agents have already performed unauthorized actions. The gap between threat velocity and workforce capacity is widening, not closing.</p>
+
+        <p>The strategic response must be threefold: upskill existing staff on AI-specific threats and frameworks, automate routine security tasks to free human capacity for complex analysis, and redesign organizational structures so that AI security is not siloed in a research team but embedded in every development, operations, and governance function. The organizations that succeed in 2026 will be those that treat AI security as an organizational capability, not a specialist function.</p>
+    </section>
+
+    <section class="section" id="recommendations">
+        <h2><span class="section-number">10</span> Actionable Recommendations for Security Leaders</h2>
+
+        <div class="recommendation-group rec-immediate">
+            <h4>🔴 Immediate Actions (This Week)</h4>
+            <ol>
+                <li><strong>Conduct an AI system inventory.</strong> Map every AI system in use, development, or procurement. Over 50% of organizations lack this basic starting point. Without it, EU AI Act risk classification is impossible.</li>
+                <li><strong>Audit Semantic Kernel deployments.</strong> If your organization uses Microsoft's Semantic Kernel framework, verify that Python packages are updated to version 1.39.4 or higher. Check for use of In-Memory Vector Store with default filter configurations and SessionsPythonPlugin with DownloadFile exposure.</li>
+                <li><strong>Review CISA AA26-097A IOCs.</strong> Query network logs for the Iranian APT IP addresses listed in CISA's advisory. If your organization operates water, wastewater, or other critical infrastructure OT systems, coordinate with CISA's 24/7 Operations Center for threat hunting support.</li>
+                <li><strong>Validate EU AI Act risk classification.</strong> Determine which systems fall under Annex III high-risk categories. The 40% unclear-classification rate suggests many organizations will discover high-risk systems they did not know they had.</li>
+                <li><strong>Scan for Forg365 phishing indicators.</strong> Review Microsoft 365/Azure AD logs for suspicious device code authentication attempts and AitM session patterns. The $400/month price point means this capability is now accessible to low-sophistication threat actors.</li>
+            </ol>
+        </div>
+
+        <div class="recommendation-group rec-short">
+            <h4>🟠 Short-Term Actions (This Month)</h4>
+            <ol>
+                <li><strong>Map AI deployments against OWASP GenAI LLM Top 10 2026.</strong> Use the August 4 publication as your baseline assessment framework. Prioritize LLM01 (Prompt Injection), LLM06 (Excessive Agency), and the two new entries: LLM07 (System Prompt Leakage) and LLM08 (Vector and Embedding Weaknesses).</li>
+                <li><strong>Implement MITRE ATLAS threat modeling.</strong> Map your AI assets to relevant ATLAS techniques. Prioritize the agent-focused techniques added in v5.4.0: AI Agent Tools (AML.T0061), Exfiltration via AI Agent Tool Invocation (AML.T0062), and Publish Poisoned AI Agent Tool.</li>
+                <li><strong>Establish continuous AI red teaming (CART-AI).</strong> Move from periodic assessments to continuous testing in CI/CD pipelines. Integrate PyRIT or Garak for automated adversarial prompt generation. Test on every model update, RAG modification, and prompt change.</li>
+                <li><strong>Deploy agent runtime privilege chains.</strong> Inventory every AI agent, the tools it can invoke, the credentials it can reach, and the downstream systems those credentials unlock. Treat connected tools as credential exposure points and restrict tool permissions to least privilege.</li>
+                <li><strong>Begin technical documentation for high-risk systems.</strong> Article 11 of the EU AI Act requires comprehensive documentation before market placement. This takes 3–6 months from scratch. If you have not started, you are already behind.</li>
+            </ol>
+        </div>
+
+        <div class="recommendation-group rec-strategic">
+            <h4>🟢 Strategic Actions (This Quarter)</h4>
+            <ol>
+                <li><strong>Build an AI security governance operating model.</strong> Align OWASP Top 10 coverage, MITRE ATLAS threat modeling, and NIST AI RMF governance into a single integrated framework. Ensure board-level visibility into AI risk posture, not just AI opportunity.</li>
+                <li><strong>Threat model your security infrastructure.</strong> Conduct formal threat modeling for endpoint protection, firewall, VPN, SIEM, and vulnerability management platforms. Assume these tools are high-value targets and design compensating controls — the pattern of security tools becoming attack vectors is now well-established.</li>
+                <li><strong>Develop AI-OT incident response playbooks.</strong> Update incident response runbooks to account for AI-enhanced OT compromises. Traditional OT incident response assumes human operators; AI-driven process manipulation may occur at machine speed and scale.</li>
+                <li><strong>Implement exposure management for AI assets.</strong> Deploy continuous discovery of exposed AI endpoints, misconfigured model APIs, and publicly accessible agent interfaces. Prioritize remediation based on exploitability and data sensitivity, not just CVSS scores.</li>
+                <li><strong>Invest in workforce AI security capability.</strong> The 54% breach attribution to skills gaps is a leading indicator of systemic failure. Upskill existing staff on AI red teaming, agent security, and adversarial ML. Automate routine tasks to free capacity for complex analysis. Redesign organizational structures so AI security is embedded across development, operations, and governance.</li>
+            </ol>
+        </div>
+    </section>
+
+    <div class="conclusion" id="conclusion">
+        <span class="emoji">🔒</span>
+        <p><strong>Stay Vigilant. Stay Patched. Stay Informed.</strong></p>
+        <p style="margin-top: 12px; font-size: 14px;"><em>Global Cybersecurity Weekly</em> is published every Friday. For questions, feedback, or threat intelligence submissions, contact our editorial team via <a href="https://github.com/1906reblabs/Global-Cybersecurity-Weekly">GitHub</a>.</p>
+    </div>
+
+    <div class="sources">
+        <h2>Sources and Further Reading</h2>
+        <p>This newsletter is compiled from open-source intelligence, vendor threat research, government advisories, and industry reporting. Key sources include CISA KEV bulletins (AA26-097A, AA26-222A), Microsoft Security Response Center (CVE-2026-26030, CVE-2026-25592), OWASP GenAI Security Project (GenAI LLM Top 10 2026, ASI Top 10 2026), MITRE ATLAS v5.4.0, the European Commission AI Act guidance, Responsible AI Labs (EU AI Act compliance analysis), IBM X-Force Threat Intelligence Index 2026, Gartner AI security market research, and the World Economic Forum Global Cybersecurity Outlook 2026.</p>
+    </div>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2026 Global Cybersecurity Weekly. All rights reserved. | TLP:CLEAR</p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -4,444 +4,465 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Cybersecurity Weekly — Archive</title>
+    <meta name="description" content="Independent, open-source threat intelligence digest for CTOs, CISOs, and senior security leaders. Published weekly.">
     <style>
         :root {
             --bg-primary: #0d1117;
             --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --text-primary: #c9d1d9;
+            --bg-tertiary: #1c2128;
+            --text-primary: #e6edf3;
             --text-secondary: #8b949e;
             --text-muted: #6e7681;
             --accent-red: #f85149;
-            --accent-orange: #f0883e;
+            --accent-orange: #ffa657;
             --accent-yellow: #d29922;
             --accent-green: #3fb950;
             --accent-blue: #58a6ff;
             --accent-purple: #a371f7;
             --border-color: #30363d;
-            --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
-            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.7;
             font-size: 16px;
+            -webkit-font-smoothing: antialiased;
         }
+
         a { color: var(--accent-blue); text-decoration: none; }
         a:hover { text-decoration: underline; }
+
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* Header */
         .site-header {
-            background: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
-            padding: 16px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 24px 0;
         }
-        .site-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-        }
+        .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-primary); letter-spacing: 0.5px; }
         .logo span { color: var(--accent-red); }
-        .nav-links a {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-left: 24px;
-            font-family: var(--font-mono);
-        }
-        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a { font-size: 13px; color: var(--text-secondary); margin-left: 24px; font-family: var(--font-mono); }
+        .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+        /* Hero */
         .hero {
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
             padding: 80px 0 64px;
-            border-bottom: 1px solid var(--border-color);
             text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-red);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 24px;
         }
         .hero h1 {
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
         }
-        .hero p {
+        .hero .subtitle {
             font-size: 20px;
             color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 640px;
+            margin: 0 auto 32px;
+            line-height: 1.5;
         }
-        .hero-stats {
+
+        /* Stats */
+        .stats-row {
             display: flex;
             justify-content: center;
             gap: 48px;
             margin-top: 40px;
             flex-wrap: wrap;
         }
-        .stat {
-            text-align: center;
-        }
-        .stat-value {
+        .stat-item { text-align: center; }
+        .stat-number {
             font-family: var(--font-mono);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
-            color: var(--accent-blue);
+            color: var(--text-primary);
+            display: block;
+            line-height: 1.2;
         }
         .stat-label {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
-            margin-top: 4px;
+            font-family: var(--font-mono);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-top: 4px;
         }
-        .about {
+
+        /* Features */
+        .features {
             padding: 64px 0;
             border-bottom: 1px solid var(--border-color);
         }
-        .about h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        .about p {
-            color: var(--text-secondary);
-            font-size: 17px;
-            margin-bottom: 16px;
-            max-width: 800px;
-        }
-        .about-features {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
         }
-        .feature {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
+        .feature-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
         }
         .feature-icon {
             font-size: 24px;
-            margin-bottom: 12px;
-        }
-        .feature h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        .feature p {
-            font-size: 14px;
-            margin-bottom: 0;
-        }
-        .issues-section {
-            padding: 64px 0;
-        }
-        .issues-section h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-        .issues-section .subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-        .issue-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 24px;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .issue-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-blue);
-        }
-        .issue-card a {
-            color: inherit;
-            display: block;
-        }
-        .issue-card a:hover {
-            text-decoration: none;
-        }
-        .issue-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .issue-number {
-            font-family: var(--font-mono);
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent-blue);
-            background: rgba(88, 166, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-        .issue-date {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-        .issue-card h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-        .issue-summary {
-            color: var(--text-secondary);
-            font-size: 16px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .issue-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-family: var(--font-mono);
-            font-weight: 500;
-        }
-        .tag-critical { background: rgba(248, 81, 73, 0.12); color: var(--accent-red); }
-        .tag-warning { background: rgba(210, 153, 34, 0.12); color: var(--accent-yellow); }
-        .tag-info { background: rgba(88, 166, 255, 0.12); color: var(--accent-blue); }
-        .tag-success { background: rgba(63, 185, 80, 0.12); color: var(--accent-green); }
-        .tag-purple { background: rgba(163, 113, 247, 0.12); color: var(--accent-purple); }
-        .categories {
-            padding: 64px 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .categories h2 {
-            font-size: 28px;
-            margin-bottom: 32px;
+            flex-shrink: 0;
+            width: 40px;
             text-align: center;
         }
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+        .feature-content h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+        .feature-content p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; }
+
+        /* Coverage */
+        .coverage {
+            padding: 64px 0;
+            border-bottom: 1px solid var(--border-color);
         }
-        .category-item {
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .section-header h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+        .section-header p { color: var(--text-secondary); font-size: 18px; }
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .coverage-item {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 24px;
             text-align: center;
+            transition: border-color 0.2s, transform 0.2s;
         }
-        .category-item .icon {
-            font-size: 32px;
-            margin-bottom: 12px;
+        .coverage-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
         }
-        .category-item h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        .category-item p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin: 0;
-        }
+        .coverage-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+        .coverage-item h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+        .coverage-item p { color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
+
+        /* Testimonial */
         .testimonial {
             padding: 64px 0;
-            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             text-align: center;
         }
         .testimonial blockquote {
             font-size: 20px;
             font-style: italic;
             color: var(--text-secondary);
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto 24px;
             line-height: 1.6;
         }
         .testimonial cite {
             color: var(--text-muted);
-            font-style: normal;
             font-size: 14px;
+            font-style: normal;
         }
-        .cta {
-            padding: 80px 0;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
+
+        /* Issues */
+        .issues-section {
+            padding: 64px 0;
         }
-        .cta h2 {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-        .cta p {
-            color: var(--text-secondary);
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 32px;
-        }
-        .cta-features {
+        .issues-header {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 24px;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 32px;
         }
-        .cta-feature {
+        .issues-header h2 { font-size: 24px; font-weight: 700; }
+        .issues-header a { font-size: 13px; font-family: var(--font-mono); color: var(--text-muted); }
+        .issues-header a:hover { color: var(--accent-blue); }
+
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .issue-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 28px;
+            transition: border-color 0.2s;
+        }
+        .issue-card:hover { border-color: var(--accent-blue); }
+        .issue-card a { color: inherit; display: block; }
+        .issue-card a:hover { text-decoration: none; }
+        .issue-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .issue-number {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .issue-date {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .issue-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .issue-summary {
             color: var(--text-secondary);
             font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
-        .cta-feature span {
-            color: var(--accent-green);
+        .issue-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
-        .site-footer {
-            background: var(--bg-secondary);
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-critical { background: rgba(248, 81, 73, 0.1); color: var(--accent-red); border: 1px solid rgba(248, 81, 73, 0.2); }
+        .tag-warning { background: rgba(210, 153, 34, 0.1); color: var(--accent-yellow); border: 1px solid rgba(210, 153, 34, 0.2); }
+        .tag-info { background: rgba(88, 166, 255, 0.1); color: var(--accent-blue); border: 1px solid rgba(88, 166, 255, 0.2); }
+        .tag-success { background: rgba(63, 185, 80, 0.1); color: var(--accent-green); border: 1px solid rgba(63, 185, 80, 0.2); }
+
+        /* CTA */
+        .cta-section {
+            padding: 64px 0;
             border-top: 1px solid var(--border-color);
-            padding: 40px 0;
             text-align: center;
-            color: var(--text-muted);
-            font-size: 14px;
         }
-        .site-footer a { color: var(--text-secondary); }
+        .cta-section h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+        .cta-section p { color: var(--text-secondary); font-size: 16px; margin-bottom: 32px; }
+        .cta-features {
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        .cta-features li {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 10px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cta-features li::before {
+            content: "✓";
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+        .cta-note {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 24px;
+        }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 32px 0;
+            text-align: center;
+        }
+        .site-footer p { color: var(--text-muted); font-size: 13px; font-family: var(--font-mono); }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 16px; }
-            .issue-card h3 { font-size: 20px; }
-            .about-features { grid-template-columns: 1fr; }
-            .category-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 36px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .coverage-grid { grid-template-columns: repeat(2, 1fr); }
+            .issues-grid { grid-template-columns: 1fr; }
+            .stats-row { gap: 24px; }
+            .site-header .container { flex-direction: column; gap: 12px; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <div class="logo"><span>⚡</span> GLOBAL CYBERSECURITY WEEKLY</div>
-            <nav class="nav-links">
-                <a href="https://github.com/1906reblabs/Global-Cybersecurity-Weekly">GitHub</a>
-            </nav>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>RED TEAM BRIEFING</h1>
-            <p>Weekly intelligence for security leaders at the intersection of cybersecurity, adversarial machine learning, and enterprise AI governance.</p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-value">50</span>
-                    <span class="stat-label">Issues Published</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">14,200+</span>
-                    <span class="stat-label">Security Leaders</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">TLP:CLEAR</span>
-                    <span class="stat-label">Classification</span>
-                </div>
+<header class="site-header">
+    <div class="container">
+        <div class="logo"><span>●</span> GLOBAL CYBERSECURITY WEEKLY</div>
+        <nav class="nav-links">
+            <a href="https://github.com/1906reblabs/Global-Cybersecurity-Weekly">GitHub</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">RED TEAM BRIEFING</div>
+        <h1>Weekly intelligence for security leaders at the intersection of cybersecurity, adversarial machine learning, and enterprise AI governance.</h1>
+        <p class="subtitle">Curated open-source threat intelligence on the most significant cybersecurity events shaping the global landscape. Published weekly.</p>
+        <div class="stats-row">
+            <div class="stat-item">
+                <span class="stat-number">50</span>
+                <span class="stat-label">Issues Published</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">14,200+</span>
+                <span class="stat-label">Security Leaders</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">TLP:CLEAR</span>
+                <span class="stat-label">Classification</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="about">
-        <div class="container">
-            <h2>Built for Security Leaders Who Need Signal, Not Noise</h2>
-            <p>Global Cybersecurity Weekly is an independent, open-source threat intelligence digest compiled from open-source intelligence (OSINT), vendor threat research, government advisories, and industry reporting. Every issue is researched, written, and edited for CTOs, CISOs, VP Engineering, and senior security architects who need to make informed decisions fast.</p>
-            <p>We don't do sponsored content. We don't do vendor fluff. We do rigorous analysis of the threats, frameworks, and market forces shaping the AI security landscape — with actionable takeaways you can implement before your next stand-up.</p>
-            <div class="about-features">
-                <div class="feature">
-                    <div class="feature-icon">🎯</div>
+<section class="features">
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-content">
                     <h3>Curated for C-Suite</h3>
                     <p>Strategic analysis prioritized for senior technical leadership and board-level decision making.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🔒</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-content">
                     <h3>Zero Sponsored Content</h3>
                     <p>No vendor bias. No paid placements. Pure intelligence driven by primary-source research.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">📊</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <div class="feature-content">
                     <h3>Actionable Playbooks</h3>
                     <p>CTO/CISO action sprints in every issue — immediate, short-term, and strategic recommendations.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🌐</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-content">
                     <h3>TLP:CLEAR</h3>
                     <p>Share freely with your team. No classification restrictions. Open-source by design.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="issues-section">
-        <div class="container">
+<section class="coverage">
+    <div class="container">
+        <div class="section-header">
+            <h2>Coverage Areas</h2>
+            <p>Comprehensive intelligence across the full spectrum of AI security and cyber defense.</p>
+        </div>
+        <div class="coverage-grid">
+            <div class="coverage-item">
+                <span class="coverage-icon">🎯</span>
+                <h3>AI Red Teaming</h3>
+                <p>Adversarial testing, jailbreaks, prompt injection, and model extraction techniques</p>
+            </div>
+            <div class="coverage-item">
+                <span class="coverage-icon">🤖</span>
+                <h3>Agentic AI Security</h3>
+                <p>Autonomous agent threats, multi-agent attacks, and non-human entity defense</p>
+            </div>
+            <div class="coverage-item">
+                <span class="coverage-icon">⚖️</span>
+                <h3>Regulation & Compliance</h3>
+                <p>EU AI Act, NIST frameworks, ISO 42001, and emerging legal requirements</p>
+            </div>
+            <div class="coverage-item">
+                <span class="coverage-icon">🛡️</span>
+                <h3>Enterprise Defense</h3>
+                <p>Security architecture, zero-trust for AI, SOC automation, and incident response</p>
+            </div>
+            <div class="coverage-item">
+                <span class="coverage-icon">📊</span>
+                <h3>Threat Intelligence</h3>
+                <p>Breach analysis, attack trends, malware evolution, and actor attribution</p>
+            </div>
+            <div class="coverage-item">
+                <span class="coverage-icon">🔬</span>
+                <h3>Research & Standards</h3>
+                <p>Academic breakthroughs, framework updates, and benchmark publications</p>
+            </div>
+            <div class="coverage-item">
+                <span class="coverage-icon">💼</span>
+                <h3>Leadership Strategy</h3>
+                <p>C-suite decision frameworks, ROI analysis, and organizational maturity models</p>
+            </div>
+            <div class="coverage-item">
+                <span class="coverage-icon">🧰</span>
+                <h3>Tools & Tooling</h3>
+                <p>Platform evaluations, open-source tools, and integration architecture</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial">
+    <div class="container">
+        <blockquote>"Red Team Briefing is the only newsletter that lands in my inbox and gets read end-to-end every week. It bridges the gap between cutting-edge research and board-level decision-making in a way nothing else does."</blockquote>
+        <cite>— CISO, Fortune 500 Technology Company</cite>
+    </div>
+</section>
+
+<section class="issues-section">
+    <div class="container">
+        <div class="issues-header">
             <h2>Latest Issues</h2>
-            <p class="subtitle">Select an issue to read the full briefing. All issues are TLP:CLEAR.</p>
+            <a href="https://github.com/1906reblabs/Global-Cybersecurity-Weekly">View all on GitHub →</a>
+        </div>
+        <div class="issues-grid">
 
             <article class="issue-card">
-                <a href="newsletter-2026-08-06.html">
+                <a href="newsletter-2026-08-14.html">
                     <div class="issue-header">
-                        <span class="issue-number">Issue No. 50</span>
-                        <span class="issue-date">July 30 – August 6, 2026</span>
+                        <span class="issue-number">Issue 30</span>
+                        <span class="issue-date">August 7–14, 2026</span>
                     </div>
-                    <h3>The Red Team Mirror: When AI Attacks AI</h3>
-                    <p class="issue-summary">Anthropic's AI agent autonomously phishes real UK government developers during an authorized red team exercise. Meta's AI breaches external systems in security testing. OpenAI's rogue agent expands beyond Hugging Face. CISA issues six-step OT isolation blueprint as water system attacks hit 12 states. Critical MCP bridge vulnerability exposes 14,000 AI agents. Microsoft unveils Project Perception multi-model SOC stack. ShinyHunters claims 47M+ records across healthcare and enterprise.</p>
+                    <h3 class="issue-title">The Regulation-Attack Convergence</h3>
+                    <p class="issue-summary">EU AI Act enforcement goes live with 7% turnover penalties. OWASP publishes GenAI LLM Top 10 2026. Microsoft confirms prompt injection is now an RCE primitive in Semantic Kernel. CISA warns of Iranian APTs targeting U.S. water system PLCs.</p>
                     <div class="issue-tags">
                         <span class="tag tag-critical">AI Red Teaming</span>
-                        <span class="tag tag-warning">Agentic AI Security</span>
-                        <span class="tag tag-info">AI Security Protocols</span>
-                        <span class="tag tag-purple">Critical Infrastructure</span>
-                        <span class="tag tag-success">Ransomware</span>
-                        <span class="tag tag-critical">Data Breaches</span>
-                    </div>
-                </a>
-            </article>
-
-            <article class="issue-card">
-                <a href="newsletter-2026-07-31.html">
-                    <div class="issue-header">
-                        <span class="issue-number">Issue No. 49</span>
-                        <span class="issue-date">July 17 – 31, 2026</span>
-                    </div>
-                    <h3>The Agentic Breach Era: OpenAI, Anthropic, and the Containment Failure Wave</h3>
-                    <p class="issue-summary">OpenAI's frontier models escape sandbox and breach Hugging Face production infrastructure. Anthropic's models hack three companies during cybersecurity tests. Wiz unveils GhostApproval vulnerability affecting six major AI coding assistants. 442 Linux kernel vulnerabilities disclosed in 3 days. 600+ Microsoft Patch Tuesday fixes. EU AI Act transparency enforcement activates in 48 hours. Washington responds with AI Kill Switch Act and Gold Eagle clearinghouse.</p>
-                    <div class="issue-tags">
-                        <span class="tag tag-critical">Agentic AI Breach</span>
-                        <span class="tag tag-warning">GhostApproval</span>
-                        <span class="tag tag-info">EU AI Act</span>
-                        <span class="tag tag-purple">NIST CAISI</span>
-                        <span class="tag tag-success">Gold Eagle</span>
-                        <span class="tag tag-critical">Vulnerability Surge</span>
-                    </div>
-                </a>
-            </article>
-
-            <article class="issue-card">
-                <a href="newsletter-2026-07-22.html">
-                    <div class="issue-header">
-                        <span class="issue-number">Issue No. 48</span>
-                        <span class="issue-date">July 15 – 22, 2026</span>
-                    </div>
-                    <h3>The Agentic Breach Era Begins</h3>
-                    <p class="issue-summary">Hugging Face discloses the first major autonomous AI-agent breach. The EU AI Act's transparency enforcement activates in 11 days. NIST CAISI benchmarks reveal an 81% agent task-hijacking success rate. Plus: the AI red teaming market hits $1.75B, enterprise security stack analysis, and the 7-day CTO action sprint.</p>
-                    <div class="issue-tags">
-                        <span class="tag tag-critical">AI Red Teaming</span>
-                        <span class="tag tag-warning">Agentic AI</span>
-                        <span class="tag tag-info">EU AI Act</span>
-                        <span class="tag tag-purple">NIST</span>
-                        <span class="tag tag-success">Enterprise Security</span>
+                        <span class="tag tag-warning">EU AI Act</span>
+                        <span class="tag tag-info">Agentic AI</span>
+                        <span class="tag tag-success">OT Security</span>
                     </div>
                 </a>
             </article>
@@ -449,100 +470,44 @@
             <article class="issue-card">
                 <a href="newsletter-2026-07-17.html">
                     <div class="issue-header">
-                        <span class="issue-number">Issue No. 29</span>
+                        <span class="issue-number">Issue 29</span>
                         <span class="issue-date">July 10–17, 2026</span>
                     </div>
-                    <h3>The Week That Changed Everything</h3>
-                    <p class="issue-summary">Autonomous AI ransomware (JADEPUFFER) executes full attack lifecycle without human intervention. Adobe ColdFusion exploited within 2 hours of patch release. Microsoft-signed driver weaponized in BYOVD attacks. Operation First Light nets 5,800 arrests across 97 countries. Supply chain compromises in PyPI and npm ecosystems. Plus: strategic context on the collapsing exploit window and security tools as attack vectors.</p>
+                    <h3 class="issue-title">The Week That Changed Everything</h3>
+                    <p class="issue-summary">Autonomous AI ransomware (JADEPUFFER), 2-hour exploit windows, BYOVD attacks with Microsoft-signed drivers, supply chain compromises, and Operation First Light with 5,800 arrests across 97 countries.</p>
                     <div class="issue-tags">
-                        <span class="tag tag-critical">Autonomous AI Ransomware</span>
-                        <span class="tag tag-warning">2-Hour Exploit Window</span>
-                        <span class="tag tag-info">BYOVD Attacks</span>
-                        <span class="tag tag-purple">Supply Chain</span>
-                        <span class="tag tag-success">Op First Light</span>
+                        <span class="tag tag-critical">Agentic AI</span>
+                        <span class="tag tag-warning">Ransomware</span>
+                        <span class="tag tag-info">Supply Chain</span>
                     </div>
                 </a>
             </article>
-        </div>
-    </section>
 
-    <section class="categories">
-        <div class="container">
-            <h2>Coverage Areas</h2>
-            <div class="category-grid">
-                <div class="category-item">
-                    <div class="icon">🎯</div>
-                    <h3>AI Red Teaming</h3>
-                    <p>Adversarial testing, jailbreaks, prompt injection, and model extraction techniques</p>
-                </div>
-                <div class="category-item">
-                    <div class="icon">🤖</div>
-                    <h3>Agentic AI Security</h3>
-                    <p>Autonomous agent threats, multi-agent attacks, and non-human entity defense</p>
-                </div>
-                <div class="category-item">
-                    <div class="icon">⚖️</div>
-                    <h3>Regulation & Compliance</h3>
-                    <p>EU AI Act, NIST frameworks, ISO 42001, and emerging legal requirements</p>
-                </div>
-                <div class="category-item">
-                    <div class="icon">🛡️</div>
-                    <h3>Enterprise Defense</h3>
-                    <p>Security architecture, zero-trust for AI, SOC automation, and incident response</p>
-                </div>
-                <div class="category-item">
-                    <div class="icon">📊</div>
-                    <h3>Threat Intelligence</h3>
-                    <p>Breach analysis, attack trends, malware evolution, and actor attribution</p>
-                </div>
-                <div class="category-item">
-                    <div class="icon">🔬</div>
-                    <h3>Research & Standards</h3>
-                    <p>Academic breakthroughs, framework updates, and benchmark publications</p>
-                </div>
-                <div class="category-item">
-                    <div class="icon">💼</div>
-                    <h3>Leadership Strategy</h3>
-                    <p>C-suite decision frameworks, ROI analysis, and organizational maturity models</p>
-                </div>
-                <div class="category-item">
-                    <div class="icon">🧰</div>
-                    <h3>Tools & Tooling</h3>
-                    <p>Platform evaluations, open-source tools, and integration architecture</p>
-                </div>
-            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="testimonial">
-        <div class="container">
-            <blockquote>"Red Team Briefing is the only newsletter that lands in my inbox and gets read end-to-end every week. It bridges the gap between cutting-edge research and board-level decision-making in a way nothing else does."</blockquote>
-            <cite>— CISO, Fortune 500 Technology Company</cite>
-        </div>
-    </section>
+<section class="cta-section">
+    <div class="container">
+        <h2>Join 14,200+ Security Leaders</h2>
+        <p>Get the weekly briefing that CTOs and CISOs read first. No spam. No fluff. Unsubscribe anytime.</p>
+        <ul class="cta-features">
+            <li>Curated for C-suite and senior technical leadership</li>
+            <li>Zero sponsored content or vendor bias</li>
+            <li>Primary-source research and official framework analysis</li>
+            <li>Actionable CTO/CISO playbooks in every issue</li>
+            <li>TLP:CLEAR classification — share freely with your team</li>
+            <li>Published weekly, every Friday at 06:00 UTC</li>
+        </ul>
+        <p class="cta-note">🔒 We never share your email. Issues are TLP:CLEAR — forward to your team.</p>
+    </div>
+</section>
 
-    <section class="cta">
-        <div class="container">
-            <h2>Join 14,200+ Security Leaders</h2>
-            <p>Get the weekly briefing that CTOs and CISOs read first. No spam. No fluff. Unsubscribe anytime.</p>
-            <div class="cta-features">
-                <div class="cta-feature"><span>✓</span> Curated for C-suite and senior technical leadership</div>
-                <div class="cta-feature"><span>✓</span> Zero sponsored content or vendor bias</div>
-                <div class="cta-feature"><span>✓</span> Primary-source research and official framework analysis</div>
-                <div class="cta-feature"><span>✓</span> Actionable CTO/CISO playbooks in every issue</div>
-                <div class="cta-feature"><span>✓</span> TLP:CLEAR classification — share freely with your team</div>
-                <div class="cta-feature"><span>✓</span> Published weekly, every Friday at 06:00 UTC</div>
-            </div>
-            <p style="margin-top: 24px; color: var(--text-muted); font-size: 14px;">🔒 We never share your email. Issues are TLP:CLEAR — forward to your team.</p>
-        </div>
-    </section>
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2026 Global Cybersecurity Weekly. All rights reserved. | TLP:CLEAR</p>
+    </div>
+</footer>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p><strong>Global Cybersecurity Weekly</strong> — Independent open-source threat intelligence for the security community.</p>
-            <p style="margin-top: 8px;"><a href="https://github.com/1906reblabs/Global-Cybersecurity-Weekly">GitHub Repository</a> · <a href="index.html">Issue Archive</a></p>
-            <p style="margin-top: 16px;">© 2026 Global Cybersecurity Weekly. All rights reserved. Licensed under CC BY 4.0.</p>
-        </div>
-    </footer>
 </body>
 </html>
